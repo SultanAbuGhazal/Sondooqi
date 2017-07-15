@@ -41,17 +41,17 @@
 				<img src="<?php echo $GLOBALS['webhost']['base_url']; ?>/app/assets/images/logo-ar.png" class="login-modal-logo" alt="sondooqi-logo">
 				<form class="user-login" method="post">
 					<div class="login-form-group">
-						<input type="email" class="form-control form-control-lg" id="login-email" name="user_email" placeholder="بريدك الإكتروني">
+						<input type="email" class="form-control form-control-lg" value="example@email.com" id="login-email" name="user_email" placeholder="بريدك الإكتروني">
 					</div>
 					<div class="login-form-group">
 						<input type="password" class="form-control form-control-lg" id="login-password" name="user_pass" placeholder="كلمة السر">
 					</div>
-					<div class="login-form-group errors-box" style="color: red">
-					</div>
-					<div class="login-form-group">
-						<button onclick="login()" class="btn btn-primary form-control form-control-lg">دخول</button>
+					<div class="login-form-group text-center errors-box" dir="ltr" style="color: red">
 					</div>
 				</form>
+				<div class="login-form-group">
+					<button onclick="login()" class="btn btn-primary form-control form-control-lg">دخول</button>
+				</div>
 				<div class="login-form-undertext">
 					<small><a href="#">نسيت كلمة السر الخاصة بك؟</a></small><br>
 					<small>ليس لديك حساب؟<a href="#">  سجل هنا </a></small>
@@ -66,16 +66,18 @@
 function login(){
     $.post(webhost+"/user/login", $("form.user-login").serialize())
     .done(function(d){
-		//window.loaction = webhost+"/home/about";
-		$("div.errors-box").append("<span style='color: green'>Success!</span>");
+		$("form.user-login .errors-box").empty();
+		var response_json = d;
+		if(response_json['goto'] != "")
+			window.location = response_json['goto'];
     })
     .fail(function(d){
-        $("div.errors-box").empty();
-        var errors_json = JSON.parse(d.responseText);
-        $.each(errors_json, function(i, v){
-            if(i) $("div.errors-box").append("<br/>");
-            $("div.errors-box").append(v);
-        });        
+		$("form.user-login .errors-box").empty();
+		var response_json = JSON.parse(d.responseText);
+        $.each(response_json['errors'], function(i, v){
+			if(i) $("form.user-login .errors-box").append("<br/>");
+            $("form.user-login .errors-box").append(v);
+		});    
     });
 };
 </script>

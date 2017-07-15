@@ -3,19 +3,66 @@
 class User extends Controller {
     public function login(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            print_r($_POST);
-            exit;
+            $goto = $GLOBALS['webhost']['base_url']."/home/about";
             $userModel = $this->model('UserModel');
 
             /*Validate user*/
-            if($userModel->userIsValid()){
-                
+            $userInfo = $userModel->userIsValid($_POST['user_email']);
+            if($userModel->errorsExist()){
+                $this->errors[] = "!البريد الإلكتروني وكلمة السر خطأ";
+                if($GLOBALS['developerMode']){
+                    $this->errors[] = "User validation failed!";
+                    $this->errors = array_merge($this->errors, $userModel->getErrors());
+                }
             }
 
             /*Check account status*/
-            /*Authenticate user*/
+            if(empty($this->errors)){
+                if($userModel->loginIsNotAllowed($_POST['user_email'])){
+                    $this->errors[] = "!للأسف، لا يسمح لك بتسجيل الدخول";
+                    if($userModel->mobileIsNotConfirmed($_POST['user_email'])){
+                        $goto = $GLOBALS['webhost']['base_url']."/user/confirm";
+                    }
+                }
+                if($userModel->errorsExist()){
+                    $this->errors[] = "!لم ينجح تسجيل الدخول";
+                    if($GLOBALS['developerMode']){
+                        $this->errors[] = "Account failure!";
+                        $this->errors = array_merge($this->errors, $userModel->getErrors());
+                    }
+                }
+            }
 
+            /*Authenticate user*/
+            if(empty($this->errors)){
+                if(!$userModel->userIsAuthentic($userInfo['id'], $_POST['user_email'], $_POST['user_pass'])){
+                    $this->errors[] = "!البريد الإلكتروني وكلمة السر خطأ";
+                }
+                if($userModel->errorsExist()){
+                    $this->errors[] = "!لم ينجح تسجيل الدخول";
+                    if($GLOBALS['developerMode']){
+                        $this->errors[] = "Authentication Failed!";
+                        $this->errors = array_merge($this->errors, $userModel->getErrors());
+                    }
+                }
+            }
+            
+		    header('Content-Type: application/json; charset=utf-8');
+            if(empty($this->errors)){
+                //$this->loginUser($userInfo['id'], $userInfo['name'], "User");
+                echo json_encode(['goto' => $goto]);
+                header("HTTP/1.1 200 OK");
+            }else{
+                echo json_encode(['errors' => $this->errors]);
+                header("HTTP/1.1 400 Bad Request");
+            }
         }
+    }
+    public function logout(){
+        //Unset and Destroy
+        $_SESSION = array();
+        session_destroy();
+        header("HTTP/1.1 200 OK");
     }
 	public function register(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -65,7 +112,7 @@ class User extends Controller {
                     $this->errors[] = "!لم ينجح التسجيل";
                     if($GLOBALS['developerMode']){
                         $this->errors[] = "User creation failed!";
-                        $this->errors = array_merge($this->errors, $addressModel->getErrors());
+                        $this->errors = array_merge($this->errors, $userModel->getErrors());
                     }
                 }
             }
@@ -75,27 +122,24 @@ class User extends Controller {
             //$SMSservice->sendConfirmationCode($mobile, $result['code']);
 
             /*Login*/
+		    header('Content-Type: application/json; charset=utf-8');
             if(empty($this->errors)){
-                $_SESSION['user_identification'] = $result['id'];
-                $_SESSION['user_name'] = $result['name'];
-                $_SESSION['login_time'] = time();
-                $_SESSION['login_type'] = "User";
-
+                //$this->loginUser($result['id'], $result['name'], "User");
+                echo json_encode(['goto' => ""]);
                 header("HTTP/1.1 200 OK");
             }else{
-                echo json_encode($this->errors);
-		        header('Content-Type: application/json; charset=utf-8');
+                echo json_encode(['errors' => $this->errors]);
                 header("HTTP/1.1 400 Bad Request");
             }
         }
     }
-    public function logout(){
-        //Unset and Destroy
-        $_SESSION = array();
-        session_destroy();
-        header("HTTP/1.1 200 OK");
+    public function confirm(){
+
     }
-    private function loginUser($userid){
-        
+    private function loginUser($userid, $name, $type){
+        $_SESSION['user_identification'] = $userid;
+        $_SESSION['user_name'] = $name;
+        $_SESSION['login_time'] = time();
+        $_SESSION['login_type'] = $type;        
     }
 }

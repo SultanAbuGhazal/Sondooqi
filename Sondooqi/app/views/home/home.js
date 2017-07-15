@@ -1,15 +1,17 @@
 function register(){
     $.post(webhost+"/user/register", $("form.user-register").serialize())
     .done(function(d){
-        //window.loaction = webhost+"/home/about";
-            $("div.errors-box").append("<span style='color: green'>Success!</span>");
+		$("form.user-register .errors-box").empty();
+		var response_json = d;
+		if(response_json['goto'] != "")
+			window.location = response_json['goto'];
     })
     .fail(function(d){
-        $("div.errors-box").empty();
-        var errors_json = JSON.parse(d.responseText);
-        $.each(errors_json, function(i, v){
-            if(i) $("div.errors-box").append("<br/>");
-            $("div.errors-box").append(v);
+        $("form.user-register .errors-box").empty();
+        var response_json = JSON.parse(d.responseText);
+        $.each(response_json['errors'], function(i, v){
+			if(i) $("form.user-register .errors-box").append("<br/>");
+            $("form.user-register .errors-box").append(v);
         });        
     });
 };

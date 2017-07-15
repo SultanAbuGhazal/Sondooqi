@@ -43,14 +43,17 @@ class UserModel extends Model{
         }
 
         if($stmt->rowCount() != 1){
-            $this->errors[] = "User Validation: User is invalid!";
             $this->errors[] = "Found ".$stmt->rowCount()." entries, there must be exactly 1.";
             return false;
         }
 
-        return $stmt->fetchObject();
+        $result = $stmt->fetchObject();
+        return [
+            "id" => $result->usrid,
+            "name" => $result->fullname
+        ];
     }
-    function loginIsAllowed($email){
+    function loginIsNotAllowed($email){
         $stmt = $this->getConnection()->prepare('SELECT allow_login FROM users AS U
         JOIN accstatus AS S ON U.accstatus=S.accstatusid
         WHERE U.usremail=:email');
@@ -64,9 +67,9 @@ class UserModel extends Model{
         }
         
         $row = $stmt->fetchObject();
-        return ($row->allow_login === "1") ? true : false;
+        return ($row->allow_login === "0") ? true : false;
     }
-    function mobileIsConfirmed($email){
+    function mobileIsNotConfirmed($email){
         $stmt = $this->getConnection()->prepare('SELECT mobile_confirmed FROM users AS U
         JOIN accstatus AS S ON U.accstatus=S.accstatusid
         WHERE U.usremail=:email');
@@ -80,9 +83,9 @@ class UserModel extends Model{
         }
         
         $row = $stmt->fetchObject();
-        return ($row->mobile_confirmed === "1") ? true : false;
+        return ($row->mobile_confirmed === "0") ? true : false;
     }
-    function authenticateUser($userid, $email, $pass){
+    function userIsAuthentic($userid, $email, $pass){
         $stmt = $this->getConnection()->prepare('SELECT usrid FROM users
         WHERE usrid=:userid AND usremail=:email AND usrpass=:pass');
         $stmt->bindParam(':userid', $userid, PDO::PARAM_STR); 
@@ -98,11 +101,7 @@ class UserModel extends Model{
             return false;
         }
 
-        if($stmt->rowCount() != 1){
-            $this->errors[] = "User Authentication: Failed!";
-            $this->errors[] = "Found ".$stmt->rowCount()." entries, there must be exactly 1.";
-            return false;
-        }
+        if($stmt->rowCount() != 1) return false;
 
         return true;
     }

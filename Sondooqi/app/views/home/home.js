@@ -1,4 +1,4 @@
-function register(){    
+function register(){
     $.post(webhost+"/user/register", $("form.user-register").serialize())
     .done(function(d){
         //window.loaction = webhost+"/home/about";

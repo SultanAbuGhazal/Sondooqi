@@ -31,7 +31,7 @@
     <div class="errors-box text-center" style="color: red" dir="ltr"></div>
     <br>
   </form>
-  <button onclick="register();">إكمال التسجيل</button>
+  <button onclick="register()">إكمال التسجيل</button>
 
 
   <?php include $GLOBALS['webhost']['scripts']; ?>

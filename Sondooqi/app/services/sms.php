@@ -5,8 +5,7 @@ class SmsService extends Model{
         $to = $mobile;
         $subject = 'Sondooqi Account Confirmation';
         $headers[] = 'MIME-Version: 1.0';
-        $headers[] = 'Content-type: text/html; charset=iso-8859-1';
-        $headers[] = 'To: Mary <mary@example.com>, Kelly <kelly@example.com>';
+        $headers[] = 'Content-type: text/html; charset=utf-8';
         $headers[] = 'From: Sondooqi-noreply <noreply@sondooqi.com>';
 
 

@@ -1,0 +1,34 @@
+{
+    "developerMode" : true,
+    "database": {
+        "host": "localhost",
+        "name": "sondooqi_db",
+        "user": "root",
+        "pass": ""
+    },
+    "services": {
+        "images": "http://localhost/Sondooqi/Sondooqi/file/m/"
+    },
+    "file_database": {
+        "host": "localhost",
+        "name": "Sondooqi_files",
+        "user": "root",
+        "pass": "",
+        "imagesfolder": "C:\\wamp64\\sondooqi-images-storage\\",
+        "rel_imagesfolder": "C:\\wamp64\\sondooqi-images-storage\\"
+    },
+    "webhost": {
+        "address": "localhost",
+        "base_url": "http://localhost/Sondooqi/Sondooqi",
+        "metadata": "../app/variables/metadata.html",
+        "scripts": "../app/variables/scripts.html",
+        "navbar": "../app/views/navbar.php",
+        "footer": "../app/views/footer.php"
+    },
+    "GoogleAPI": {
+        "key": ""
+    },
+    "settings": {
+        "allowed_image_types" : ["image/png"]
+    }
+}

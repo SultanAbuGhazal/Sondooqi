@@ -26,7 +26,7 @@
         "footer": "../app/views/footer.php"
     },
     "GoogleAPI": {
-        "key": ""
+        "key": " "
     },
     "settings": {
         "allowed_image_types" : ["image/png"]

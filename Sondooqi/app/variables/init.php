@@ -7,7 +7,6 @@ $GLOBALS = json_decode($config_json, true);
 date_default_timezone_set('Asia/Dubai');
 
 
-
 require_once 'C:\wamp64\www\Sondooqi\Sondooqi\app\core\App.php';
 require_once 'C:\wamp64\www\Sondooqi\Sondooqi\app\core\Controller.php';
 require_once 'C:\wamp64\www\Sondooqi\Sondooqi\app\core\Model.php';

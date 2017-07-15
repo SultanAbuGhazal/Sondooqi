@@ -1,0 +1,15 @@
+Options -Indexes
+
+RewriteEngine On
+
+
+RewriteBase /Sondooqi/Sondooqi
+
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+
+
+RewriteRule ^(.+)$ public/index.php?url=$1 [QSA,L]
+

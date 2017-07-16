@@ -45,8 +45,7 @@ class FilesModel extends Model{
         $imgheight = isset($options['height']) ? intval($options['height']) : 0;
         $imgwidth = isset($options['width']) ? intval($options['width']) : 0;
         
-        try{
-            $stmt->execute();
+        try{ $stmt->execute();
         }catch(PDOException $Exp){
             $this->errors[] = "Unexpected error occured!";
             if($GLOBALS['developerMode']){
@@ -62,8 +61,7 @@ class FilesModel extends Model{
         WHERE imgid=:imgid');        
         $stmt->bindParam(':imgid', $imgid, PDO::PARAM_STR);
 
-        try{
-            $stmt->execute();
+        try{ $stmt->execute();
         }catch(PDOException $Exp){
             $this->errors[] = "Unexpected error occured!";
             if($GLOBALS['developerMode']){

@@ -24,6 +24,22 @@ class AddressModel extends Model{
         
         return $id;
     }
+    function getUserAddresses($userid){
+        $stmt = $this->getConnection()->prepare('SELECT * FROM addresses AS A 
+        WHERE A.addressid IN (SELECT location_address FROM boxes where user=:userid)');        
+        $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            if($GLOBALS['developerMode']){
+                $this->errors[] = $Exp->getMessage();
+            }
+            return false;
+        }
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     private function generateAddressID() {
         $len = 6;
         $charset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

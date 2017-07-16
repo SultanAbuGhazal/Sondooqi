@@ -22,8 +22,35 @@ class BoxModel extends Model{
         
         return $id;
     }
-    function getBoxItems($boxid){
+    function getUserBoxes($userid){
+        $stmt = $this->getConnection()->prepare('SELECT boxid, country FROM boxes AS B WHERE B.user=:userid');        
+        $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
 
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            if($GLOBALS['developerMode']){
+                $this->errors[] = $Exp->getMessage();
+            }
+            return false;
+        }
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function getBoxItems($boxid){
+        $stmt = $this->getConnection()->prepare('SELECT * FROM items AS I WHERE I.box=:boxid');        
+        $stmt->bindParam(':boxid', $boxid, PDO::PARAM_STR);
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            if($GLOBALS['developerMode']){
+                $this->errors[] = $Exp->getMessage();
+            }
+            return false;
+        }
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     private function generateBoxID() {
         $len = 6;

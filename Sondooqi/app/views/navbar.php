@@ -12,6 +12,14 @@
 			<li class="nav-item">
 				<a class="nav-link" href="#">الرئيسية <span class="sr-only">(current)</span></a>
 			</li>
+			<?php if($this->userIsLoggedIn()) : ?>
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/profile/box"; ?>">محتويات صندوقي</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/profile/address"; ?>">عناويني</a>
+			</li>
+			<?php endif; ?>
 			<li class="nav-item">
 				<a class="nav-link" href="#">كيف نعمل؟</a>
 			</li>
@@ -19,10 +27,17 @@
 				<a class="nav-link" href="#">تواصل معنا</a>
 			</li>
 		</ul>
+		<?php if($this->userIsLoggedIn()) : ?>
+		<!-- login modal trigger -->
+		<button onclick="logout()" type="button" class="btn btn-danger" id="logout-btn">
+		تسجيل خروج
+		</button>
+		<?php else : ?>
 		<!-- login modal trigger -->
 		<button type="button" class="btn btn-primary" id="login-btn" data-toggle="modal" data-target="#login-modal">
 		تسجيل دخول
 		</button>
+		<?php endif; ?>
 	</div>
 </nav>
 
@@ -61,7 +76,21 @@
 	</div>
 </div>
 
-
+<?php if($this->userIsLoggedIn()) : ?>
+<script type="text/javascript">
+function logout(){
+    $.post(webhost+"/user/logout")
+    .done(function(d){
+		var response_json = d;
+		if(response_json['goto'] != "")
+			window.location = response_json['goto'];
+    })
+    .fail(function(d){
+		alert("Sondooqi: Logout Failed!");   
+    });
+};
+</script>
+<?php else : ?>
 <script type="text/javascript">
 function login(){
     $.post(webhost+"/user/login", $("form.user-login").serialize())
@@ -81,13 +110,15 @@ function login(){
     });
 };
 </script>
+<?php endif; ?>
 <style type="text/css">
 .nav-item{
   margin-left: 15px;
 }
-#login-btn{
-	color: black;
-	border: 1px solid grey;
+#login-btn,
+#logout-btn{
+	color: green;
+	border: 1px solid green;
 	border-radius: 50px;
 	width: 120px;
 	line-height: 0.5;
@@ -95,7 +126,12 @@ function login(){
 	background-color: transparent;
 	margin: auto 35px auto 20px;
 }
-#login-btn:hover{
+#logout-btn{
+	border: 2px solid rgba(244, 66, 89, 0.4);
+	color: red;
+}
+#login-btn:hover,
+#logout-btn:hover{
 	background-color: rgba(255, 255, 255, 0.9);
 }
 </style>

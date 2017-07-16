@@ -168,7 +168,7 @@ class UserModel extends Model{
         
         return [
             "id" => $id,
-            "name" => $fullname,
+            "name" => $name,
             "code" => $confirmation_code
         ];
     }
@@ -176,8 +176,7 @@ class UserModel extends Model{
         $stmt = $this->getConnection()->prepare('UPDATE users SET accstatus=2 WHERE usrid=:userid');
         $stmt->bindParam(':userid', $userid, PDO::PARAM_STR); 
 
-        try{
-            $stmt->execute();
+        try{ $stmt->execute();
         }catch(PDOException $Exp){
             $this->errors[] = "Unexpected error occured!";
             $this->reportExpection($Exp);
@@ -190,6 +189,17 @@ class UserModel extends Model{
         }
 
         return $stmt->fetchObject();
+    }
+    function deleteUserEntry($userid){
+        $stmt = $this->getConnection()->prepare('DELETE FROM users WHERE usrid=:userid');
+        $stmt->bindParam(':userid', $userid, PDO::PARAM_STR); 
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            $this->reportExpection($Exp);
+            return false;
+        }
     }
     private function generateHash($password, $salt){
         return hash('sha256', $password.$salt.$password);

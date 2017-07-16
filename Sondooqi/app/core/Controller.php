@@ -44,4 +44,7 @@ class Controller{
         if (!$full) $string = array_slice($string, 0, 1);
         return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
+	function userIsLoggedIn(){
+		return isset($_SESSION['user_identification']);
+	}
 }

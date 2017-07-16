@@ -45,7 +45,4 @@ class App{
 	private function validateAccess($controller){
 		return $controller;
 	}
-	private function userIsLoggedIn(){
-		return isset($_SESSION['user_id']);
-	}
 }

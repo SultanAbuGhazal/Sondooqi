@@ -49,7 +49,7 @@ class User extends Controller {
             
 		    header('Content-Type: application/json; charset=utf-8');
             if(empty($this->errors)){
-                //$this->loginUser($userInfo['id'], $userInfo['name'], "User");
+                $this->loginUser($userInfo['id'], $userInfo['name'], "User");
                 echo json_encode(['goto' => $goto]);
                 header("HTTP/1.1 200 OK");
             }else{
@@ -62,11 +62,14 @@ class User extends Controller {
         //Unset and Destroy
         $_SESSION = array();
         session_destroy();
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['goto' => $GLOBALS['webhost']['base_url']."/home"]);
         header("HTTP/1.1 200 OK");
     }
 	public function register(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $userModel = $this->model('UserModel');
+            $goto = $GLOBALS['webhost']['base_url']."/home/about";
 
             /*Check email and phone number uniqueness*/
             if($userModel->emailIsUsed($_POST['user_email'])){
@@ -117,6 +120,21 @@ class User extends Controller {
                 }
             }
 
+            /*Create Box*/
+            if(empty($this->errors)){
+                $boxModel = $this->model('BoxModel');
+                $box_id = $boxModel->createNewBox($result['id'], "United Arab Emirates", 99, $boxModel->uaebox_address);
+
+                if($boxModel->errorsExist()){
+                    $this->errors[] = "!لم ينجح التسجيل";
+                    if($GLOBALS['developerMode']){
+                        $this->errors[] = "Box creation failed!";
+                        $this->errors = array_merge($this->errors, $boxModel->getErrors());
+                    }
+                    $userModel->deleteUserEntry($result['id']);
+                }
+            }    
+
             /*Send confirmation SMS*/
             //$SMSservice = $this->service('sms');
             //$SMSservice->sendConfirmationCode($mobile, $result['code']);
@@ -124,8 +142,8 @@ class User extends Controller {
             /*Login*/
 		    header('Content-Type: application/json; charset=utf-8');
             if(empty($this->errors)){
-                //$this->loginUser($result['id'], $result['name'], "User");
-                echo json_encode(['goto' => ""]);
+                $this->loginUser($result['id'], $result['name'], "User");
+                echo json_encode(['goto' => $goto]);
                 header("HTTP/1.1 200 OK");
             }else{
                 echo json_encode(['errors' => $this->errors]);

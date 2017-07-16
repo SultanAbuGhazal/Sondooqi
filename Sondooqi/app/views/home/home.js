@@ -3,7 +3,7 @@ function register(){
     .done(function(d){
 		$("form.user-register .errors-box").empty();
 		var response_json = d;
-		if(response_json['goto'] != "")
+		if(response_json['goto'] != "");
 			window.location = response_json['goto'];
     })
     .fail(function(d){

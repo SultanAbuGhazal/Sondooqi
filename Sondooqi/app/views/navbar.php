@@ -1,6 +1,6 @@
 
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded"
-	style="background-color: rgb(255, 218, 151); border-bottom: 2px solid black">
+<nav class="navbar navbar-toggleable-md fixed-top navbar-light bg-faded"
+	style="background-color: rgba(255, 218, 151, 0.7); border-bottom: 2px solid black">
 	<button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbar-toggle" aria-controls="navbar-toggle" aria-expanded="false" aria-label="Toggle navigation">
 	<span class="navbar-toggler-icon"></span>
 	</button>
@@ -21,10 +21,10 @@
 			</li>
 			<?php endif; ?>
 			<li class="nav-item">
-				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/home/about"; ?>">كيف نعمل؟</a>
+				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/home#how-it-works"; ?>">كيف نعمل؟</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/home/about#contact"; ?>">تواصل معنا</a>
+				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/home#contact-us"; ?>">تواصل معنا</a>
 			</li>
 		</ul>
 		<?php if($this->userIsLoggedIn()) : ?>
@@ -130,7 +130,7 @@ function login(){
 	width: 120px;
 	line-height: 0.5;
 	height: 35px;
-	background-color: transparent;
+	background-color: rgba(255, 255, 255, 0.4);
 	margin: auto 35px auto 20px;
 }
 #logout-btn{

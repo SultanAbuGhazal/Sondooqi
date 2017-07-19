@@ -10,7 +10,7 @@
 <body style="background-color: rgb(237, 237, 237);">
   <?php include $GLOBALS['webhost']['navbar']; ?>
 
-  <div class="container" style="height: 45px;"><!--SPACER--></div>
+  <div class="container" style="height: 125px;"><!--SPACER--></div>
 
   <div class="container card">
     <div class="row">
@@ -31,19 +31,24 @@
               <td><?php echo $data['addresses'][0]['mobile']; ?></td> </tr>
           </tbody>
         </table>
+        <div class="text-center">
+          <button class="btn btn-warning" style="width: 30%"><strong>تعليمات الإستخدام</strong></button>
+          <button class="btn btn-secondary" style="width: 65%"><strong>أرني محتويات صندوقي هذا</strong></button>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="container" style="height: 25px;"><!--SPACER--></div>
+  <div class="container" style="height: 50px;"><!--SPACER--></div>
   <hr style="width: 40%; border: 1px solid orange;">
 
   <div class="container card-padding">
-    <h1 class="notice-title text-center">ملاحظات هامة</h1>
+    <h1 class="notice-title text-center">ملاحظات هامة</h1><br>
     <ul class="custom-list">
-      <li>يمكنك إستخدام هذا العنوان عند الشراء من أي موقع من مواقع التسوق الإلكتروني الموجودة في دولة الإمارات العربية المتحدة.</li>
-      <li>بما أن هذه المواقع تعمل -في الغالب- خارج نطاق الدولة التي تقطن أنت فيها، يجب عليك الدفع عن طريق بطاقة إئتمانية وعدم إستخدام طريقة الدفع عند الإستلام.</li>
+      <li>يمكن إستخدام هذا العنوان عند الشراء من أي موقع من مواقع التسوق الإلكتروني الموجودة في دولة الإمارات العربية المتحدة.</li>
+      <li>بما أن هذه المواقع تعمل -في الغالب- خارج نطاق الدولة التي تقطن أنت فيها، يجب الدفع عن طريق بطاقة إئتمانية وعدم إستخدام طريقة الدفع عند الإستلام.</li>
       <li>هذا الرقم مهم</li>
+      <li>عند التسوق من موقعك المفضل، تأكد أنك تتسوق من الموقع المتاح في الدولة المذكورة في عنوان صندوقك. </li>
       <li></li>
     </ul>
   </div>
@@ -52,7 +57,7 @@
   <hr style="width: 40%; border: 1px solid orange;">
 
   <div class="container card-padding">
-    <h1 class="notice-title text-center">تعليمات الإستخدام</h1>
+    <h1 class="notice-title text-center">تعليمات الإستخدام</h1><br>
     <ul class="custom-list">
       <li>مثال 1: مثال عربي</li>
       <li>مثال 2: مثال إنجليزي</li>

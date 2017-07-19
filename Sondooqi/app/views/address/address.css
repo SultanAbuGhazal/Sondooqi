@@ -1,0 +1,40 @@
+.card{    
+    border-radius: 0px;
+    padding: 25px 25px 15px 25px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.card-padding{
+    padding: 25px 25px 15px 25px;
+}
+.heading{
+    color: orange;
+    font-size: 64px;
+    font-family: 'Changa', sans-serif;
+}
+.paragraph{
+    font-family: 'Cairo', sans-serif;
+}
+.notice-title{
+    color: orange;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+}
+.websites-row{
+    margin-top: 50px;
+    font-family: 'Cairo', sans-serif;
+}
+.website-item{
+    margin-bottom: 40px;
+}
+.website-item-desc {
+    min-height: 150px;
+}
+.custom-list{
+    font-family: 'Cairo', sans-serif;
+}
+@media only screen and (max-width: 990px) {
+    .website-item-desc {
+        min-height: 0px;
+    }
+}

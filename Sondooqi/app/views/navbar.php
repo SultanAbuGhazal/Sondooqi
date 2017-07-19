@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded"
-	style="background-color: #f5f5f5 ; border-bottom: 4px solid black">
+	style="background-color: rgb(255, 218, 151); border-bottom: 2px solid black">
 	<button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbar-toggle" aria-controls="navbar-toggle" aria-expanded="false" aria-label="Toggle navigation">
 	<span class="navbar-toggler-icon"></span>
 	</button>
@@ -17,7 +17,7 @@
 				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/profile/box"; ?>">محتويات صندوقي</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/profile/address"; ?>">عناويني</a>
+				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/profile/address"; ?>">عنوان صندوقي</a>
 			</li>
 			<?php endif; ?>
 			<li class="nav-item">
@@ -64,7 +64,7 @@
 					<div class="login-form-group text-center errors-box" dir="ltr" style="color: red">
 					</div>
 					<div class="login-form-group">
-						<button onclick="login(); return false;" class="btn btn-primary form-control form-control-lg">دخول</button>
+						<button onclick="login(); return false;" class="btn btn-primary form-control form-control-lg" style="color: white; font-family: 'Cairo', sans-serif; font-weight: 600; letter-spacing: 1px; background-color: orange; border: none;">دخــــول</button>
 					</div>
 				</form>
 				<div class="login-form-undertext">
@@ -94,7 +94,10 @@ function logout(){
 <?php else : ?>
 <script type="text/javascript">
 function showLoginModal(){
-	$("input#login-password").focus();
+	$("#login-modal").on('shown.bs.modal', function(){
+		$("input#login-email").focus();
+		console.log("Modal Shown");
+	});
 };
 function login(){
     $.post(webhost+"/user/login", $("form.user-login").serialize())

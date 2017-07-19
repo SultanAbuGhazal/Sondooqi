@@ -62,4 +62,19 @@ class BoxModel extends Model{
         }
         return "BX".$res;
     }
+    private function creatBoxAddress(){
+        
+        $addressModel = $this->model('AddressModel');
+        $address_id = $addressModel->insertAddress(
+            $_POST['user_name'], 
+            $_POST['user_mobile'], 
+            $_POST['user_address'], 
+            $_POST['user_nearby'], 
+            $_POST['user_city'], 
+                    "الضفة الغربية",
+                    "فلسطين"
+                );
+
+
+    }
 }

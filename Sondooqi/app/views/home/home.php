@@ -11,24 +11,49 @@
   <?php include $GLOBALS['webhost']['navbar']; ?>
   
 		<div class="backdrop">
-      <div class="container" style="height: 100px;"><!--SPACER--></div>
+      <div class="container" style="height: 90px;"><!--SPACER--></div>
       <div class="container">
         <div class="row">
-          <h4>التسجيل</h4><br>
-          <form class="user-register" method="post">    
-            <input type="email" placeholder="البريد الإلكتروني" id="register-email" name="user_email" value="example@email.com">
-            <input type="text" placeholder="رقم الجوال" id="register-email" name="user_mobile" value="0501234567">
-            <input type="password" placeholder="كلمة السر" id="register-password" name="user_pass" value="1234">
-            <hr>
-            <input type="text" placeholder="الإسم الكامل" id="register-name" name="user_name" value="سلطان مبين جودت أبوغزال">
-            <input type="text" placeholder="العنوان" id="register-address" name="user_address" value="سبسطية">
-            <input type="text" placeholder="المحافظة" id="register-city" name="user_city" value="نابلس">
-            <input type="text" placeholder="بالقرب من؟" id="register-nearby" name="user_nearby" value="قرب البلدية">
-            <hr>
-            <div class="errors-box text-center" style="color: red" dir="ltr"></div>
-            <br>
-            <button class="btn btn-secondary" onclick="register(); return false;">إكمال التسجيل</button>
-          </form>
+          <div class="col-lg-6"></div>
+          <div class="col-lg-6 text-right" style="background-color: rgba(255, 255, 255, 0.6); padding-top: 15px; padding-bottom: 15px; border-radius: 5px;">
+            <h2 class="register-heading">إحصل على صندوقك الآن.. <strong style="font-size: 46px;">مجاناً</strong>!</h2>
+            <form class="user-register" method="post">
+              <div class="form-group">
+                <input class="form-control" type="email" placeholder="البريد الإلكتروني" id="register-email" name="user_email" value="example@email.com">
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" placeholder="رقم الجوال" id="register-mobile" name="user_mobile" value="0501234567">
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="password" placeholder="كلمة السر" id="register-password" name="user_pass" value="1234">
+              </div>
+              <hr style="width: 80%; border: 1px solid orange;">
+              <div class="form-group">
+                <input class="form-control" type="text" placeholder="الإسم الكامل" id="register-name" name="user_name" value="سلطان مبين جودت أبوغزال">
+              </div>
+              <div class="form-group row">
+                <div class="col-lg-6">
+                  <input class="form-control" type="text" placeholder="المحافظة" id="register-city" name="user_city" value="نابلس">
+                </div>
+                <div class="col-lg-6">
+                  <input class="form-control" type="text" placeholder="العنوان" id="register-address" name="user_address" value="سبسطية">
+                </div>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" placeholder="بالقرب من؟" id="register-nearby" name="user_nearby" value="قرب البلدية">
+              </div>
+              <div class="form-check text-left" dir="ltr">
+                <label class="form-check-label" style="color: white">
+                  <input class="form-check-input" type="checkbox" value="">
+                     أنا أوافق على <a href="">الشروط والاحكام</a>
+                </label>
+              </div>
+              <div class="errors-box text-center" style="color: red" dir="ltr"></div>
+              <div class="text-left">
+                <button class="btn btn-secondary" onclick="register(); return false;" style="color: white; font-family: 'Cairo', sans-serif; font-weight: 600; letter-spacing: 1px; background-color: orange; border: none; height: 40px; width: 40%;">إكمال التسجيل</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

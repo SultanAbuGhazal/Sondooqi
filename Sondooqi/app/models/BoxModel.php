@@ -62,19 +62,33 @@ class BoxModel extends Model{
         }
         return "BX".$res;
     }
-    private function creatBoxAddress(){
+    private function createBoxAddress($country = "United Arab Emirates", $boxid, $fullname){
+        //In this function, the Box Model uses the Address Model
+        $stmt = $this->getConnection()->prepare('SELECT A.* FROM addresses AS A
+        JOIN ouraddresses AS O ON A.addressid=O.address WHERE O.country=:country');        
+        $stmt->bindParam(':country', $country, PDO::PARAM_STR);
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            if($GLOBALS['developerMode']){
+                $this->errors[] = $Exp->getMessage();
+            }
+            return false;
+        }
         
+        $result = $stmt->fetchObject();
+
         $addressModel = $this->model('AddressModel');
         $address_id = $addressModel->insertAddress(
-            $_POST['user_name'], 
-            $_POST['user_mobile'], 
-            $_POST['user_address'], 
-            $_POST['user_nearby'], 
-            $_POST['user_city'], 
-                    "الضفة الغربية",
-                    "فلسطين"
-                );
-
-
+            $fullname,
+            $result->mobile, 
+            $result->line_one, 
+            $result->line_two.", ".$boxid, 
+            $result->city, 
+            $result->province, 
+            $result->country
+        );
+        return $address_id;
     }
 }

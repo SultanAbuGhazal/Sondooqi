@@ -123,7 +123,7 @@ class User extends Controller {
             /*Create Box*/
             if(empty($this->errors)){
                 $boxModel = $this->model('BoxModel');
-                $box_id = $boxModel->createNewBox($result['id'], "United Arab Emirates", 99, $boxModel->uaebox_address);
+                $box_id = $boxModel->createNewBox($result['id'], $result['name'], "United Arab Emirates", 99);
 
                 if($boxModel->errorsExist()){
                     $this->errors[] = "!لم ينجح التسجيل";

@@ -1,8 +1,7 @@
 <?php
 
 class BoxModel extends Model{
-    public $uaebox_address = "ADuaebox";
-    function createNewBox($userid, $country, $capacity, $address){
+    function createNewBox($userid, $fullname, $country, $capacity){
         $stmt = $this->getConnection()->prepare('INSERT INTO boxes
         VALUES(:boxid, :userid, :country, :capacity, :address)');
         $stmt->bindParam(':boxid', $id, PDO::PARAM_STR);
@@ -11,7 +10,8 @@ class BoxModel extends Model{
         $stmt->bindParam(':capacity', $capacity, PDO::PARAM_INT);
         $stmt->bindParam(':address', $address, PDO::PARAM_STR);
         
-        $id = $this->generateBoxID();      
+        $id = $this->generateBoxID();
+        $address = createBoxAddress($country, $id, $fullname); 
 
         try{ $stmt->execute();
         }catch(PDOException $Exp){

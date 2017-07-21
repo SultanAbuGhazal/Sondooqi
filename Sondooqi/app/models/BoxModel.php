@@ -11,7 +11,7 @@ class BoxModel extends Model{
         $stmt->bindParam(':address', $address, PDO::PARAM_STR);
         
         $id = $this->generateBoxID();
-        $address = createBoxAddress($country, $id, $fullname); 
+        $address = $this->createBoxAddress($country, $id, $fullname);
 
         try{ $stmt->execute();
         }catch(PDOException $Exp){
@@ -62,7 +62,7 @@ class BoxModel extends Model{
         }
         return "BX".$res;
     }
-    private function createBoxAddress($country = "United Arab Emirates", $boxid, $fullname){
+    private function createBoxAddress($country, $boxid, $fullname){
         //In this function, the Box Model uses the Address Model
         $stmt = $this->getConnection()->prepare('SELECT A.* FROM addresses AS A
         JOIN ouraddresses AS O ON A.addressid=O.address WHERE O.country=:country');        

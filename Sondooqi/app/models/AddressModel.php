@@ -25,8 +25,8 @@ class AddressModel extends Model{
         return $id;
     }
     function getUserAddresses($userid){
-        $stmt = $this->getConnection()->prepare('SELECT * FROM addresses AS A 
-        WHERE A.addressid IN (SELECT location_address FROM boxes where user=:userid)');        
+        $stmt = $this->getConnection()->prepare('SELECT A.* FROM addresses AS A 
+        JOIN boxes AS B ON B.location_address=A.addressid WHERE B.user=:userid');        
         $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
 
         try{ $stmt->execute();

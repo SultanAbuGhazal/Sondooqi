@@ -96,7 +96,6 @@ function logout(){
 function showLoginModal(){
 	$("#login-modal").on('shown.bs.modal', function(){
 		$("input#login-email").focus();
-		console.log("Modal Shown");
 	});
 };
 function login(){

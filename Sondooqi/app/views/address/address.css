@@ -1,3 +1,6 @@
+.mrk{
+    border: 2px dashed red;
+}
 .card{    
     border-radius: 0px;
     padding: 25px 25px 25px 25px;
@@ -20,16 +23,6 @@
     font-weight: 700;
     font-family: 'Cairo', sans-serif;
 }
-.websites-row{
-    margin-top: 50px;
-    font-family: 'Cairo', sans-serif;
-}
-.website-item{
-    margin-bottom: 40px;
-}
-.website-item-desc {
-    min-height: 150px;
-}
 .custom-list{
     font-family: 'Cairo', sans-serif;
 }
@@ -37,4 +30,9 @@
     .website-item-desc {
         min-height: 0px;
     }
+}
+#example-form-one{
+    border-radius: 2px;
+    border: 2px solid grey;
+    padding: 15px 15px 0 15px;
 }

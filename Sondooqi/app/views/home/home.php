@@ -65,6 +65,10 @@
     <div class="container" style="height: 40px;"><!--SPACER--></div>
     <hr style="width: 100%; border: 1px solid orange;">
     <h1 class="heading-1 text-center">كيف نعمل؟</h1><br><br>
+    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-6"></div>
+    </div>
     <div class="text-center">
       <img style="width: 70%" src="<?php echo $GLOBALS['webhost']['base_url']; ?>/app/assets/images/cycle-small.png" alt="how-it-works-figure">      
     </div>
@@ -73,16 +77,16 @@
 
   <div class="container" id="prices">
     <div class="container" style="height: 40px;"><!--SPACER--></div>
-    <hr style="width: 100%; border: 1px solid orange;">
+    <hr style="width: 100%; border: 1px solid orange;"><br>
     <div class="row">
-      <div class="col-md-6 mrk" style="margin: 100px 0 70px 0;">
+      <div class="col-md-6" style="margin: 100px 0 70px 0;">
         <h2 class="heading-2">أسعارنا</h2>
         <p class="paragraph">
-          أسعار الشحن لدينا تعتمد على وزن الطرود. تكلفة أول 2\1 كيلو جرام هي 70 شيقل جديد بحيث يضاف 30 شيقل جديد لكل 2\1 كيلو جرام بعد أول كيلو جرام.
+          أسعار الشحن لدينا تعتمد على وزن الطرود. تكلفة أول 1/2 كيلو جرام هي 70 شيقل جديد بحيث يضاف 30 شيقل جديد لكل 1/2 كيلو جرام بعد أول كيلو جرام.
         </p>
       </div>
-      <div class="col-md-6 text-center mrk">
-        <img src="<?php echo $GLOBALS['webhost']['base_url']; ?>/app/assets/images/ad1.png" style="width: 100%" alt="price-ad">
+      <div class="col-md-6 text-center">
+        <img src="<?php echo $GLOBALS['webhost']['base_url']; ?>/app/assets/images/prices-ad.png" style="width: 100%" alt="price-ad">
       </div>
     </div>
   </div>

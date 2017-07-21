@@ -21,10 +21,12 @@
       <div class="col-md-6">
         <table class="table table-sm">
           <tbody>
+            <tr> <th scope="row"></th> <td>الإسم</td>
+              <td><?php echo $data['addresses'][0]['fullname']; ?></td> </tr>
             <tr> <th scope="row"></th> <td>المنطقة</td>
               <td><?php echo $data['addresses'][0]['province']; ?></td> </tr>
             <tr> <th scope="row"></th> <td>العنوان</td>
-              <td><?php echo $data['addresses'][0]['line_one'].", ".$data['addresses'][0]['line_two'].", BXfgKh6E"; ?></td> </tr>
+              <td><?php echo $data['addresses'][0]['line_one'].", ".$data['addresses'][0]['line_two']; ?></td> </tr>
             <tr> <th scope="row"></th> <td>المدينة</td>
               <td><?php echo $data['addresses'][0]['city'].", ".$data['addresses'][0]['country']; ?></td> </tr>
             <tr> <th scope="row"></th> <td>رقم التواصل</td>
@@ -32,8 +34,8 @@
           </tbody>
         </table>
         <div class="text-center">
-          <button class="btn btn-warning" style="width: 30%"><strong>تعليمات الإستخدام</strong></button>
-          <button class="btn btn-secondary" style="width: 65%"><strong>أرني محتويات صندوقي هذا</strong></button>
+          <a href="#instructions"><button class="btn btn-warning" style="width: 30%"><strong>تعليمات الإستخدام</strong></button></a>
+          <a href="<?php echo $GLOBALS['webhost']['base_url']."/profile/box"; ?>"><button class="btn btn-secondary" style="width: 65%"><strong>أرني محتويات صندوقي هذا</strong></button></a>
         </div>
       </div>
     </div>
@@ -45,21 +47,76 @@
   <div class="container card-padding">
     <h1 class="notice-title text-center">ملاحظات هامة</h1><br>
     <ul class="custom-list">
-      <li>يمكن إستخدام هذا العنوان عند الشراء من أي موقع من مواقع التسوق الإلكتروني الموجودة في دولة الإمارات العربية المتحدة.</li>
-      <li>بما أن هذه المواقع تعمل -في الغالب- خارج نطاق الدولة التي تقطن أنت فيها، يجب الدفع عن طريق بطاقة إئتمانية وعدم إستخدام طريقة الدفع عند الإستلام.</li>
-      <li>هذا الرقم مهم</li>
-      <li>عند التسوق من موقعك المفضل، تأكد أنك تتسوق من الموقع المتاح في الدولة المذكورة في عنوان صندوقك. </li>
-      <li></li>
+      <li>يمكن إستخدام هذا العنوان عند الشراء من أي موقع من مواقع التسوق الإلكتروني الموجودة في دولة الإمارات العربية المتحدة.</li><br>
+      <li>بما أن هذه المواقع تعمل -في الغالب- خارج نطاق الدولة التي تقطن أنت فيها، يجب الدفع عن طريق بطاقة إئتمانية وعدم إستخدام طريقة الدفع عند الإستلام.</li><br>
+      <li><strong>هام جداً:</strong> رقم صندوقي هو رقم مكون من ثمانية رموز يبدأ بحرفي "BX" وهو رقم مهم جدا. إنه الطريقة الوحيدة التي تمكننا من معرفة محتويات صندوقك، لذلك يجب التأكد من ذكر هذا الرقم في العنوان عند موقع التسوق لضمان عدم ضياع محتويات صندوقك وضمان وصولها إليك.</li>
+      <div class="row">
+        <img style="height: 100%; width: 60%; margin: 15px auto 15px auto;" src="..\app\assets\images\note-one.png" alt="note-one">
+      </div>
+      <li>عند التسوق من موقعك المفضل، تأكد أنك تتسوق من موقع متاح في الدولة المذكورة في عنوان صندوقك. </li>
+      <div class="row">
+        <img style="height: 100%; width: 100%; margin: 0px auto 15px auto;" src="..\app\assets\images\note-two.png" alt="note-one">
+      </div>
+      <li>الجمارك.</li><br>
+      <li>بعض مواقع التسوق قد تطلب تأكيداً إجبارياً لرقم الجوال عبر رسالة نصية قصيرة، في هذه الحالة إستخدم رقمك الخاص للتأكيد وضع الرقم المصاحب لعنوان صندوقك فى خانة الملاحظات أو أي خانة أخرى.</li>
     </ul>
   </div>
 
-  <div class="container" style="height: 25px;"><!--SPACER--></div>
+  <div class="container" style="height: 25px;" id="instructions"><!--SPACER--></div>
   <hr style="width: 40%; border: 1px solid orange;">
 
   <div class="container card-padding">
     <h1 class="notice-title text-center">تعليمات الإستخدام</h1><br>
     <ul class="custom-list">
-      <li>مثال 1: مثال عربي</li>
+      <li><strong>المثال الأول:</strong> هذا المثال من موقع سوق.كوم</li><br>
+      <div class="row" dir="ltr">
+        <form class="col-md-6 offset-md-3" id="example-form-one">
+          <fieldset disabled>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">Full Name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">Address Line 1</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">Address Line 2</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">City</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">State</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">Country</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">Phone number</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
       <li>مثال 2: مثال إنجليزي</li>
     </ul>
   </div>
@@ -69,50 +126,9 @@
 
   <div class="container card-padding">
     <h1 class="notice-title text-center">مواقعنا المفضلة</h1>
-      <div class="websites-row row">
-        <div class="col-lg-4 text-center website-item">
-          <img src="..\app\assets\images\wadi-logo.png" alt="wadi-logo" height="140"><br><br>
-          <p class="website-item-desc">
-            وادي دوت كوم هو موقع للتسوق الالكتروني يهدف أن يكون حلقة الوصل لتوفير مختلف المنتجات في دولة الإمَارَات العَرَبيّة المُتّحِدة . يقوم وادي بشكل أساسي على توصيل العملاء بأفضل الموردين عبر دول مجلس التعاون الخليجي لضمان أفضل العروض.
-          </p>
-          <p><a class="btn btn-secondary" href="https://ar-ae.wadi.com/" role="button">إذهب إلى الموقع &raquo;</a></p>
-        </div>
-        <div class="col-lg-4 text-center website-item">
-          <img src="..\app\assets\images\souq-logo.png" alt="souq-logo" height="140"><br><br>
-          <p class="website-item-desc">
-            سوق.كوم, هو أكبر موقع للتجارة الإلكترونية في العالم العربي، ويضم أكثر من 400،000 منتج من مختلف الفئات التي تشمل الإلكترونيات، والأزياء، والمنتجات المنزلية، والساعات، والعطور، وغيرها.
-          </p>
-          <p><a class="btn btn-secondary" href="https://uae.souq.com/ae-ar/" role="button">إذهب إلى الموقع &raquo;</a></p>
-        </div>
-        <div class="col-lg-4 text-center website-item">
-          <img src="..\app\assets\images\namshi-logo.jpg" alt="namshi-logo" height="140"><br><br>
-          <p class="website-item-desc">
-            نمشي، مزيج من روح الشباب والمرح والأصالة. أصبحت نمشي النافذة الأوسع التي يطل منها عشاق الموضة، وخاصة الشباب، على أحدث الإتجاهات وآخر الصرعات وأرقى الماركات في عالم الأزياء.                         
-          </p>
-          <p><a class="btn btn-secondary" href="https://ar-ae.namshi.com/" role="button">إذهب إلى الموقع &raquo;</a></p>
-        </div>
-        <div class="col-lg-4 text-center website-item">
-          <img src="..\app\assets\images\mumzworld-logo.png" alt="mumzworld-logo" style="max-width: 100%; max-height: 140px; margin: 25px 0 25px 0;"><br><br>
-          <p class="website-item-desc">
-            ممزورلد، تصفحي كتالوج منتجاتنا الذي يحتوي أوسع تشكيلة بأسعار منافسة. بدأً من المنتجات المحلية الأكثر مبيعاً، والمنتجات الحائزة على الجوائز عالمياً، إضافة إلى منتجات فريدة من الضروري اقتناءها لكل أم، وكل ما قد تحتجنه منذ اليوم الأول لولادة الطفل وحتى عمر 12 عام.
-          </p>
-          <p><a class="btn btn-secondary" href="http://www.mumzworld.com/ar/" role="button">إذهب إلى الموقع &raquo;</a></p>
-        </div>
-        <div class="col-lg-4 text-center website-item">
-          <img src="..\app\assets\images\zeroohm-logo.png" alt="zeroohm-logo" style="max-width: 100%; max-height: 140px;"><br><br>
-          <p class="website-item-desc">
-            Zero Ohm General Trading LLC is an electronics and electromechanics company based in Dubai, United Arab Emirates. In Zero Ohm, we provide an easy access for high quality electronics components that targets universities, schools and laboratories.
-          </p>
-          <p><a class="btn btn-secondary" href="https://www.zeroohm.com/" role="button">إذهب إلى الموقع &raquo;</a></p>
-        </div>
-        <div class="col-lg-4 text-center website-item">
-          <img src="..\app\assets\images\crazydeals-logo.png" alt="crazydeals-logo" style="max-width: 100%; max-height: 140px; margin: 35px 0 35px 0;"><br><br>
-          <p class="website-item-desc">
-            عند التسوق على Crazydeals.com، يمكنك أن تطمئن حول صحة وجودة المنتجات التي تختارها . مع العديد من الشركاء العلامة التجارية الموثوقة خلال الشحن الجوي، ونحن نضمن لك المنتجات و العلامة التجارية بأسعار لا مثيل لها!
-          </p>
-          <p><a class="btn btn-secondary" href="http://www.crazydeals.com/" role="button">إذهب إلى الموقع &raquo;</a></p>
-        </div>
-      </div>
+    <?php 
+      $this->getSnippet("favWebsites"); 
+    ?>
   </div>
 
   <?php include $GLOBALS['webhost']['footer']; ?>

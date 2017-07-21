@@ -13,6 +13,10 @@ class Model{
         $this->dbusername = $GLOBALS['database']['user'];
         $this->dbpassword = $GLOBALS['database']['pass'];
     }
+    protected function model($model){
+        require_once '../app/models/'.$model.'.php';
+        return new $model();
+    }
     function getConnection(){
         $conn = new PDO("mysql:host=$this->dbhost;dbname=$this->dbname;charset=utf8", $this->dbusername, $this->dbpassword);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

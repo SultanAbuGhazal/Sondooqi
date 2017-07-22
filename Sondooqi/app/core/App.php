@@ -1,6 +1,7 @@
 <?php
 
 class App{
+	private $defaultMethod = 'defaultMethod';
 	private $controller = 'home';
 	private $method = 'defaultMethod';
 	private $params = [];
@@ -15,8 +16,6 @@ class App{
 			unset($url[0]);
 		}
 
-		//validatAccess will change the variable according to user privilege
-		$this->controller = $this->validateAccess($this->controller);
 		require_once '../app/controllers/'.$this->controller.'Controller.php';
 
 		//Create an instance of the needed controller
@@ -34,6 +33,9 @@ class App{
 		//Set the parameterd
 		$this->params[] = $url ? array_values($url) : [];
 
+		//validatAccess will change the variable according to user privilege
+		//$validated = $this->validateAccess($this->controller, $this->method);
+
 		//Call the method and pass the parameters
 		call_user_func_array([$this->controller, $this->method], $this->params);
 	}
@@ -42,7 +44,27 @@ class App{
 			return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
 		}
 	}
-	private function validateAccess($controller){
-		return $controller;
+	private function validateAccess($controller, $method){
+		switch($controller){
+			case 'admin':
+				if($this->userIsAdmin()) return ['cont' => $controller, 'meth' => $method];
+				else return ['cont' => 'home', 'meth' => $this->defaultMethod];
+			break;
+			case 'home': 
+			break;
+			case 'profile': 
+			 	if($this->userIsLoggedIn()) return ['cont' => $controller, 'meth' => $method];
+				else return ['cont' => 'home', 'meth' => $this->defaultMethod];
+			break;
+			case 'user': 
+			break;
+		}
+		return ['cont' => $controller, 'meth' => $method];
+	}
+	private function userIsAdmin(){
+		return ($_SESSION['login_type'] == "Admin") ? true : false;
+	}
+	private function userIsLoggedIn(){
+		return isset($_SESSION['user_identification']);
 	}
 }

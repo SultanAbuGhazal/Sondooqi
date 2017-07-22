@@ -13,12 +13,17 @@
 				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/home"; ?>">الرئيسية <span class="sr-only">(current)</span></a>
 			</li>
 			<?php if($this->userIsLoggedIn()) : ?>
-			<li class="nav-item">
-				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/profile/box"; ?>">محتويات صندوقي</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/profile/address"; ?>">عنوان صندوقي</a>
-			</li>
+				<?php if($this->userIsAdmin()) : ?>
+				<li class="nav-item">
+					<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/admin/dashboard"; ?>">لوحة التحكم</a>
+				</li>
+				<?php endif; ?>
+				<li class="nav-item">
+					<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/profile/box"; ?>">محتويات صندوقي</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/profile/address"; ?>">عنوان صندوقي</a>
+				</li>
 			<?php endif; ?>
 			<li class="nav-item">
 				<a class="nav-link" href="<?php echo $GLOBALS['webhost']['base_url']."/home#how-it-works"; ?>">كيف نعمل؟</a>

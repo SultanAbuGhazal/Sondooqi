@@ -31,7 +31,7 @@ class FilesModel extends Model{
         $imgid = $this->generateFileID();
         
         
-        $imgpath = $this->imagesfolder . $imgid . $name;             
+        $imgpath = $this->imagesfolder . $imgid . "." . explode(".", $name)[1];             
         $basename = $imgid . "." . explode(".", $name)[1]; 
 
         if(!move_uploaded_file($tmpPath, $imgpath)){

@@ -1,0 +1,21 @@
+.mrk{
+    border: 2px dashed red;
+}
+.box-heading{
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Cairo', sans-serif;
+}
+.custom-item{
+    padding: 10px;
+    background-color: aliceblue;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+}
+.custom-item-container{
+    padding: 0 3px 6px 3px;
+}
+.item-description{
+    padding: 5px 10px 0 10px;
+    font-family: 'Cairo', sans-serif;
+}

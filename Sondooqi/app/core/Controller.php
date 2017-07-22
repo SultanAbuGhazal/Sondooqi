@@ -25,26 +25,31 @@ class Controller{
         $diff->d -= $diff->w * 7;
 
         $string = array(
-            'y' => 'year',
-            'm' => 'month',
-            'w' => 'week',
-            'd' => 'day',
-            'h' => 'hour',
-            'i' => 'minute',
-            's' => 'second',
+            'y' => 'سنوات',
+            'm' => 'أشهر',
+            'w' => 'أسابيع',
+            'd' => 'أيام',
+            'h' => 'ساعات',
+            'i' => 'دقائق',
+            's' => 'ثوان',
         );
         foreach ($string as $k => &$v) {
             if ($diff->$k) {
-                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? '' : '');
             } else {
                 unset($string[$k]);
             }
         }
 
         if (!$full) $string = array_slice($string, 0, 1);
-        return $string ? implode(', ', $string) . ' ago' : 'just now';
+        return $string ? implode(', ', $string) . '' : 'منذ بضع ثوان';
     }
 	function userIsLoggedIn(){
 		return isset($_SESSION['user_identification']);
+	}
+	function userIsAdmin(){
+        if(isset($_SESSION['login_type']))
+		    return ($_SESSION['login_type'] == "Admin") ? true : false;
+        else return false;
 	}
 }

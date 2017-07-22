@@ -38,7 +38,8 @@ class BoxModel extends Model{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     function getBoxItems($boxid){
-        $stmt = $this->getConnection()->prepare('SELECT * FROM items AS I WHERE I.box=:boxid');        
+        $stmt = $this->getConnection()->prepare('SELECT itemid, origin_arrival_time, weight, photo, status_text, status_text_ar
+        FROM items AS I JOIN itemstatus AS S ON I.status=S.itemstatusid WHERE I.box=:boxid ORDER BY origin_arrival_time ASC');        
         $stmt->bindParam(':boxid', $boxid, PDO::PARAM_STR);
 
         try{ $stmt->execute();

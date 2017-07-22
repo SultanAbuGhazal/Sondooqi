@@ -14,7 +14,7 @@
 			<div class="row dashboard-nav-container">
 				<nav class="nav nav-pills flex-column flex-sm-row" id="dash-tabs">
 					<h4 style="margin: 10px; color: grey;">Admin Dashboard</h4>
-					<a class="flex-sm-fill text-sm-center nav-link active" data-toggle="tab" role="tab" href="#insert">Insert Items</a>
+					<a class="flex-sm-fill text-sm-center nav-link active" data-toggle="tab" role="tab" href="#items">Items</a>
 					<a class="flex-sm-fill text-sm-center nav-link" data-toggle="tab" role="tab" href="#batches">Batches</a>
 					<a class="flex-sm-fill text-sm-center nav-link" data-toggle="tab" role="tab" href="#users">Users</a>
 				</nav>
@@ -23,7 +23,7 @@
 		<div class="container" dir="ltr">
 			<div class="row">
 				<div class="tab-content">
-					<div class="tab-pane active" id="insert" role="tabpanel">
+					<div class="tab-pane active" id="items" role="tabpanel">
                         <div class="container">
                             <div class="row" style="height: 50px;"><!--SPACER--></div>
                             <div class="row">
@@ -59,6 +59,7 @@
 			</div>
         </div>
         
+        <div class="container-fluid fixed-bottom" style="background-color: black; height: 25px;"></div>
         <?php include $GLOBALS['webhost']['scripts']; ?>
         
 		<script src="<?php echo $GLOBALS['webhost']['base_url']; ?>/app/views/dashboard/dashboard.js"></script>

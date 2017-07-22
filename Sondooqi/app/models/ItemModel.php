@@ -1,7 +1,7 @@
 <?php
 
 class ItemModel extends Model{
-    function createNewItem($photo, $weight, $boxid){
+    function createNewItem($photo, $weight, $boxid, $adminid = ""){
         $stmt = $this->getConnection()->prepare('INSERT INTO items
         VALUES(:id, now(), null, :weight, :boxid, null, :photo, 1)');
         $stmt->bindParam(':id', $id, PDO::PARAM_STR);

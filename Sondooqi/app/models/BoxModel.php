@@ -84,7 +84,7 @@ class BoxModel extends Model{
             $fullname,
             $result->mobile, 
             $result->line_one, 
-            $result->line_two.", ".$boxid, 
+            $boxid, 
             $result->city, 
             $result->province, 
             $result->country

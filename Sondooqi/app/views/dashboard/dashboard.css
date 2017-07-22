@@ -1,0 +1,23 @@
+.marked{
+    border: 3px dashed red;
+}
+.dashboard-nav-container{
+    background-color: black;
+}
+.nav-link{
+    color: white;
+}
+.nav-link.active{
+    background-color: grey !important;
+    border-radius: 0px !important;
+}
+@media screen and (max-width: 480px) {
+    .nav{
+        width: 100% !important;
+    }
+}
+#new-item-form{
+    padding: 15px;
+    background-color: rgb(237, 237, 237);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.4);
+}

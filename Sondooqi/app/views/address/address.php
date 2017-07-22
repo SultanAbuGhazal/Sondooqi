@@ -68,56 +68,105 @@
   <div class="container card-padding">
     <h1 class="notice-title text-center">تعليمات الإستخدام</h1><br>
     <ul class="custom-list">
-      <li><strong>المثال الأول:</strong> هذا المثال من موقع سوق.كوم</li><br>
+      <li><strong>المثال الأول:</strong> في حالة وجود "Address line 1" و "Address line 2"</li><br>
       <div class="row" dir="ltr">
         <form class="col-md-6 offset-md-3" id="example-form-one">
           <fieldset disabled>
             <div class="form-group row">
               <label class="col-sm-3 col-form-label text-right">Full Name</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['fullname']; ?>">
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-3 col-form-label text-right">Address Line 1</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['line_one']; ?>">
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-3 col-form-label text-right">Address Line 2</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label text-right">City</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label text-right">State</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['line_two']; ?>">
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-3 col-form-label text-right">Country</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['country']; ?>">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">City</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['city']; ?>">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">State/Area</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['province']; ?>">
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-3 col-form-label text-right">Phone number</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['mobile']; ?>">
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div><br>
+      <li><strong>المثال الثاني:</strong> في حالة وجود "Address line 1" و "Address line 2"</li><br>
+      <div class="row" dir="ltr">
+        <form class="col-md-6 offset-md-3" id="example-form-one">
+          <fieldset disabled>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">Full Name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['fullname']; ?>">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">Address Line 1</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['line_one']; ?>">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">Address Line 2</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['line_two']; ?>">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">Country</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['country']; ?>">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">City</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['city']; ?>">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">State/Area</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['province']; ?>">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">Phone number</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['mobile']; ?>">
               </div>
             </div>
           </fieldset>
         </form>
       </div>
-      <li>مثال 2: مثال إنجليزي</li>
+      </li>
     </ul>
   </div>
 

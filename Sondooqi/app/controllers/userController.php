@@ -46,10 +46,26 @@ class User extends Controller {
                     }
                 }
             }
+
+            /*Get user privilege*/
+            if(empty($this->errors)){
+                $login_type = $userModel->getUserPrivilege($userInfo['id']);
+                if($userModel->errorsExist()){
+                    $this->errors[] = "!لم ينجح تسجيل الدخول";
+                    if($GLOBALS['developerMode']){
+                        $this->errors[] = "Authentication Failed!";
+                        $this->errors = array_merge($this->errors, $userModel->getErrors());
+                    }
+                }
+            }
             
 		    header('Content-Type: application/json; charset=utf-8');
             if(empty($this->errors)){
-                $this->loginUser($userInfo['id'], $userInfo['name'], "User");
+                if($login_type->admin_login == "0"){
+                    $this->loginUser($userInfo['id'], $userInfo['name'], "User");
+                }elseif($login_type->admin_login == "1"){
+                    $this->loginUser($userInfo['id'], $userInfo['name'], "Admin");
+                }
                 echo json_encode(['goto' => $goto]);
                 header("HTTP/1.1 200 OK");
             }else{

@@ -1,5 +1,7 @@
 <?php
 
+/*Version 2.0*/
+
 class FilesModel extends Model{
     private $imagesfolder = '';
     public function __construct() {
@@ -28,13 +30,11 @@ class FilesModel extends Model{
         
         $imgid = $this->generateFileID();
         
-        //Old
-        //$imgpath = $this->imagesfolder . $imgid . $name; 
+        
+        $imgpath = $this->imagesfolder . $imgid . $name;             
+        $basename = $imgid . "." . explode(".", $name)[1]; 
 
-        //New       
-        $basename = $imgid . $name;      
-
-        if(!move_uploaded_file($tmpPath, $basename)){
+        if(!move_uploaded_file($tmpPath, $imgpath)){
             $this->errors[] = "Failed to upload the image: $name";
             return false;
         }
@@ -81,5 +81,14 @@ class FilesModel extends Model{
 
         $row = $stmt->fetchObject();
         return $this->imagesfolder . $row->basename;
+    }
+    private function generateFileID($len = 16) {
+        $charset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $setlen = strlen($charset);
+        $res = '';
+        for ($i = 0; $i < $len; $i++) {
+            $res .= $charset[rand(0, $setlen - 1)];
+        }
+        return $res;
     }
 }

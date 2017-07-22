@@ -14,6 +14,11 @@
       <div class="container" style="height: 90px;"><!--SPACER--></div>
       <div class="container">
         <div class="row">
+          <?php if($this->userIsLoggedIn()) : ?>
+          <div class="col-lg-6">
+            
+          </div>
+          <?php else : ?>
           <div class="col-lg-6">
             
           </div>
@@ -56,6 +61,7 @@
               </div>
             </form>
           </div>
+          <?php endif; ?>
         </div>
       </div>
     </div>
@@ -74,7 +80,6 @@
     </div>
   </div>
 
-
   <div class="container" id="prices">
     <div class="container" style="height: 40px;"><!--SPACER--></div>
     <hr style="width: 100%; border: 1px solid orange;"><br>
@@ -82,7 +87,7 @@
       <div class="col-md-6" style="margin: 100px 0 70px 0;">
         <h2 class="heading-2">أسعارنا</h2>
         <p class="paragraph">
-          أسعار الشحن لدينا تعتمد على وزن الطرود. تكلفة أول 1/2 كيلو جرام هي 70 شيقل جديد بحيث يضاف 30 شيقل جديد لكل 1/2 كيلو جرام بعد أول كيلو جرام.
+          تعتمد أسعار الشحن لدينا على وزن الطرود. تكلفة أول 1/2 كيلو جرام هي 70 شيقل جديد بحيث يضاف 30 شيقل جديد لكل 1/2 كيلو جرام إضافي.
         </p>
       </div>
       <div class="col-md-6 text-center">
@@ -90,7 +95,6 @@
       </div>
     </div>
   </div>
-
 
   <div class="container" id="contact-us">
     <div class="container" style="height: 40px;"><!--SPACER--></div>

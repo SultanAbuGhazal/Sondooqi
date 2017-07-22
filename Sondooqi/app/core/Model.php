@@ -22,15 +22,6 @@ class Model{
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $conn;
     }
-    function generateFileID($len = 16) {
-        $charset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $setlen = strlen($charset);
-        $res = '';
-        for ($i = 0; $i < $len; $i++) {
-            $res .= $charset[rand(0, $setlen - 1)];
-        }
-        return $res;
-    }
     function errorsExist(){
         return !empty($this->errors);
     }

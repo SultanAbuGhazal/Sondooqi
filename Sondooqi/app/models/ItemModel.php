@@ -20,6 +20,38 @@ class ItemModel extends Model{
         
         return $id;
     }
+    function updateBatchStatus($batchid, $newStatus){
+        $stmt = $this->getConnection()->prepare('UPDATE items 
+        SET status=(SELECT itemstatusid FROM itemstatus WHERE status_text=:newStatus)
+        WHERE batch=:batchid');
+        $stmt->bindParam(':newStatus', $newStatus, PDO::PARAM_STR);
+        $stmt->bindParam(':batchid', $batchid, PDO::PARAM_INT);
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            $this->reportExpection($Exp);
+            return false;
+        }
+        
+        return true;
+    }
+    function updateItemStatus($itemid, $newStatus){
+        $stmt = $this->getConnection()->prepare('UPDATE items 
+        SET status=(SELECT itemstatusid FROM itemstatus WHERE status_text=:newStatus)
+        WHERE itemid=:itemid');
+        $stmt->bindParam(':newStatus', $newStatus, PDO::PARAM_STR);
+        $stmt->bindParam(':itemid', $itemid, PDO::PARAM_STR);
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            $this->reportExpection($Exp);
+            return false;
+        }
+        
+        return true;
+    }
     private function generateItemID() {
         $len = 13;
         $charset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

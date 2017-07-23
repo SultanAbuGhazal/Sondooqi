@@ -168,7 +168,8 @@ class User extends Controller {
         }
     }
     public function confirm(){
-
+        //Get the view
+        $this->view('confirm/confirm');
     }
     private function loginUser($userid, $name, $type){
         $_SESSION['user_identification'] = $userid;

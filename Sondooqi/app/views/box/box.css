@@ -6,16 +6,12 @@
     font-weight: 500;
     font-family: 'Cairo', sans-serif;
 }
-.custom-item{
-    padding: 10px;
-    background-color: aliceblue;
-    border: 1px solid lightgrey;
-    border-radius: 2px;
+.item{
+    background-color: rgb(250, 250, 250);
 }
-.custom-item-container{
-    padding: 0 3px 6px 3px;
+.item:hover{
+	background-color: aliceblue;
 }
-.item-description{
-    padding: 5px 10px 0 10px;
-    font-family: 'Cairo', sans-serif;
+.total-cost{
+    font-family: 'Changa', sans-serif;
 }

@@ -2,6 +2,7 @@
 
 class Runphp extends Controller {
 	public function defaultMethod(){
-        echo "أهلا وسهلا";
+        $model = $this->model('ItemModel');
+        //$model->updateBatchStatus(324568, "Delivered");
     }
 }

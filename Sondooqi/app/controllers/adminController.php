@@ -32,4 +32,19 @@ class Admin extends Controller {
             }
         }
     }
+	public function updateBatch(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $goto = "";            
+            $itemModel = $this->model('ItemModel');
+            $itemModel->updateBatchStatus($_POST['batchid'], $_POST['newstatus']);
+
+            if(!$itemModel->errorsExist() && empty($this->errors)){
+                echo json_encode(['goto' => $goto]);
+                header("HTTP/1.1 200 OK");
+            }else{
+                echo json_encode(['errors' => array_merge($itemModel->getErrors(), $fileModel->getErrors(), $this->errors)]);
+                header("HTTP/1.1 400 Bad Request");
+            }
+        }
+    }
 }

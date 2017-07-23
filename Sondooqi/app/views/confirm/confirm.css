@@ -1,0 +1,31 @@
+.heading{
+    color: orange;
+    font-size: 48px;
+    font-family: 'Changa', sans-serif;
+}
+.number{
+    margin: 15px 0 0 0;
+}
+.paragraph{
+    margin: 15px 0 0 0;
+    font-family: 'Cairo', sans-serif;
+}
+#code-textbx{
+    margin: auto;
+    min-width: 300px;
+    width: 60%;
+}
+.confirm-btn{
+    width: 250px;
+    font-family: 'Cairo', sans-serif; 
+    font-weight: 600; 
+    letter-spacing: 1px; 
+}
+.bottom-spacer{
+    height: 50px;
+}
+@media only screen and (max-width: 990px) {
+    .bottom-spacer{
+        height: 100px;
+    }
+}

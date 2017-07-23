@@ -16,7 +16,11 @@ class App{
 			unset($url[0]);
 		}
 
+		//validatAccess will change the variable according to user privilege
+		$this->validateAccess($this->controller, $url[1]);
+
 		require_once '../app/controllers/'.$this->controller.'Controller.php';
+
 
 		//Create an instance of the needed controller
 		$this->controller = new $this->controller;
@@ -33,9 +37,6 @@ class App{
 		//Set the parameterd
 		$this->params[] = $url ? array_values($url) : [];
 
-		//validatAccess will change the variable according to user privilege
-		//$validated = $this->validateAccess($this->controller, $this->method);
-
 		//Call the method and pass the parameters
 		call_user_func_array([$this->controller, $this->method], $this->params);
 	}
@@ -44,25 +45,30 @@ class App{
 			return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
 		}
 	}
-	private function validateAccess($controller, $method){
+	private function validateAccess(&$controller, &$method){
 		switch($controller){
 			case 'admin':
-				if($this->userIsAdmin()) return ['cont' => $controller, 'meth' => $method];
-				else return ['cont' => 'home', 'meth' => $this->defaultMethod];
+				if($this->userIsAdmin()) return;
+				else {header("Location: ".$GLOBALS['webhost']['base_url']."/home"); exit;}
 			break;
-			case 'home': 
-			break;
+			case 'file': return; break;
+			case 'home': return; break;
 			case 'profile': 
-			 	if($this->userIsLoggedIn()) return ['cont' => $controller, 'meth' => $method];
-				else return ['cont' => 'home', 'meth' => $this->defaultMethod];
+				if($this->userIsLoggedIn()) return;
+				else {header("Location: ".$GLOBALS['webhost']['base_url']."/home"); exit;}
 			break;
-			case 'user': 
+			case 'runphp':
+				if($this->userIsAdmin()) return;
+				else {header("Location: ".$GLOBALS['webhost']['base_url']."/home"); exit;}
 			break;
+			case 'user': return; break;
 		}
 		return ['cont' => $controller, 'meth' => $method];
 	}
 	private function userIsAdmin(){
-		return ($_SESSION['login_type'] == "Admin") ? true : false;
+        if(isset($_SESSION['login_type']))
+		    return ($_SESSION['login_type'] == "Admin") ? true : false;
+        else return false;
 	}
 	private function userIsLoggedIn(){
 		return isset($_SESSION['user_identification']);

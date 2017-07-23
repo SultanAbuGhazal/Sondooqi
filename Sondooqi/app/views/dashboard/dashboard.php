@@ -23,37 +23,81 @@
 		<div class="container" dir="ltr">
 			<div class="row">
 				<div class="tab-content">
+
+
+                    <!--Items Tab-->
 					<div class="tab-pane active" id="items" role="tabpanel">
                         <div class="container">
                             <div class="row" style="height: 50px;"><!--SPACER--></div>
                             <div class="row">
-                                <form method="post" id="new-item-form" enctype="multipart/form-data">
-                                    <h2>Insert a New Item</h2> <br>
-                                    <div class="form-group">
-                                        <label for="newitem-photo">Item Photo</label>
-                                        <input type="file" accept="image/*" class="form-control-file" id="newitem-photo" name="photo" required>
-                                    </div><br>
-                                    <div class="form-group">
-                                        <label for="newitem-box">Box ID number</label>
-                                        <input type="text" class="form-control" id="newitem-box" name="boxid" value="BX" maxlength="8" minlength="8" required>
-                                    </div><br>
-                                    <div class="form-group">
-                                        <label for="newitem-weight">Item Weight</label>
-                                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                            <input type="number" step="0.5" class="form-control" id="newitem-weight" name="weight" required>
-                                            <div class="input-group-addon">Kg</div>
-                                        </div>
-                                    </div><br>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Insert Item</button>
-                                        <span style="color: green; display: none;" id="success-insert-msg">Insertion Successful!</span>
-                                        <span style="color: red; display: none;" id="fail-insert-msg">Insertion Failed!</span>
+                                <div class="col-md-5">
+                                    <div class="dash-card">
+                                        <form method="post" id="new-item-form" enctype="multipart/form-data">
+                                            <h2>Insert a New Item</h2> <br>
+                                            <div class="form-group">
+                                                <label for="newitem-photo">Item Photo</label>
+                                                <input type="file" accept="image/*" class="form-control-file" id="newitem-photo" name="photo" required>
+                                            </div><br>
+                                            <div class="form-group">
+                                                <label for="newitem-box">Box ID number</label>
+                                                <input type="text" class="form-control" id="newitem-box" name="boxid" value="BX" maxlength="8" minlength="8" required>
+                                            </div><br>
+                                            <div class="form-group">
+                                                <label for="newitem-weight">Item Weight</label>
+                                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                                    <input type="number" step="0.5" class="form-control" id="newitem-weight" name="weight" required>
+                                                    <div class="input-group-addon">Kg</div>
+                                                </div>
+                                            </div><br>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">Insert Item</button>
+                                                <span style="color: green; display: none;" id="success-insert-msg">Insertion Successful!</span>
+                                                <span style="color: red; display: none;" id="fail-insert-msg">Insertion Failed!</span>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-					<div class="tab-pane" id="batches" role="tabpanel">Batches</div>
+
+
+                    <!--Batches Tab-->
+					<div class="tab-pane" id="batches" role="tabpanel">
+                        <div class="container">
+                            <div class="row" style="height: 50px;"><!--SPACER--></div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="dash-card">
+                                    <form method="post" id="update-batch-form" enctype="multipart/form-data">
+                                        <h2>Update Batch Status</h2> <br>
+                                        <div class="form-group">
+                                            <label for="update-batch-id">Batch ID number</label>
+                                            <input type="number" class="form-control" id="update-batch-id" name="batchid" value="BX" max="99999999" min="0" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="update-batch-status">New Status</label>
+                                            <input type="text" class="form-control" id="update-batch-status" name="newstatus" required>
+                                        </div><br>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                            <span style="color: green; display: none;" id="success-update-msg">Update Successful!</span>
+                                            <span style="color: red; display: none;" id="fail-update-msg">Update Failed!</span>
+                                        </div>
+                                    </form>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="dash-card">
+                                        <h2>All Batches</h2> <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--Users Tab-->
 					<div class="tab-pane" id="users" role="tabpanel">Users</div>
 				</div>
 			</div>

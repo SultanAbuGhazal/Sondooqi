@@ -26,12 +26,34 @@
           <div id="collapse-uae" class="collapse show" role="tabpanel" aria-labelledby="heading-uae">
             <div class="card-block" style="padding-right: 25px; padding-left: 25px;">
 
-              <div class="row">
-                <?php foreach($data['boxes'][0]['items'] as $item) : ?>
-                  <?php $this->getSnippet("boxItemTemplate", $item); ?>
-                <?php endforeach; ?>
-              </div>
               
+                <?php $sum = 0;?>
+                <?php if(empty($data['boxes'][0]['items'])) : ?>
+                <div class="row">
+                  فش إشي
+                </div>
+                <?php else : ?>
+                <div class="row">
+                <?php foreach($data['boxes'][0]['items'] as $item) : ?>
+                  <?php
+                  $weight = doubleval($item['weight']);
+                  $halfs = ($weight-0.5) / 0.5;
+                  $cost = $weight == 0 ? 0 : (70 + (30 * $halfs));               
+                  $item['cost'] = $cost;
+                  $sum += $cost;
+                  $this->getSnippet("boxItemTemplate", $item); 
+                  ?>
+                <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
+
+              <br>
+              <h4 class="total-cost">العدد الكلي: <span><?php echo sizeof($data['boxes'][0]['items']); ?></span> طرد</h4>
+              <h4 class="total-cost">مجموع تكلفة الشحن: <span><?php echo number_format($sum, 2); ?></span> ش.ج.</h4> 
+              <div class="text-left" style="font-family: 'Cairo', 'sans-serif'">             
+                <small>تُدفع تكاليف الشحن نقداً عند الإستلام.</small><br>
+                <small>في بعض الحلات النادرة، قد يكون هناك تكاليف جمركية سيتم إضافتها إلى تكاليف الشحن.</small>
+              </div>
             </div>
           </div>
         </div>

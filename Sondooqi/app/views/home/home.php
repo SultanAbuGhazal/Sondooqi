@@ -15,8 +15,12 @@
       <div class="container">
         <div class="row">
           <?php if($this->userIsLoggedIn()) : ?>
-          <div class="col-lg-6">
-            
+          <div class="col-lg-12 text-center" style="background-color: rgba(0, 0, 0, 0.4); padding: 15px 0 0 0; border-radius: 5px;">
+            <h2 class="heading-3">أهلاً بك في صندوقي</h2><br>
+            <i class="fa fa-smile-o fa-5x" style="color: white;" aria-hidden="true"></i>
+            <p class="main-paragraph">نتمنى لك تسوقاً ممتعاً</p><br>
+            <a href="<?php echo $GLOBALS['webhost']['base_url'].'/profile/address'; ?>"><button class="btn btn-warning custom-btn">أرني عنوان صندوقي</button></a>
+            <a href="<?php echo $GLOBALS['webhost']['base_url'].'/profile/address#instructions'; ?>"><button class="btn btn-secondary custom-btn-two">كيف أستخدم صندوقي؟</button></a>
           </div>
           <?php else : ?>
           <div class="col-lg-6">

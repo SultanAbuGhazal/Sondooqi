@@ -2,8 +2,9 @@
 
 class Profile extends Controller {
 	public function defaultMethod(){
-        //Get the view
-        $this->view('home/home');
+        //No default method, get home view
+        header("Location: ".$GLOBALS['webhost']['base_url']."/home");
+        exit;
     }
     public function box(){
         $boxModel = $this->model('BoxModel');

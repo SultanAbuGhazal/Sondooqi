@@ -1,6 +1,11 @@
 <?php
 
 class Admin extends Controller {
+	public function defaultMethod(){
+        //No default method, get home view
+        header("Location: ".$GLOBALS['webhost']['base_url']."/admin/dashboard");
+        exit;
+    }
 	public function dashboard(){
         //Get the view
         $this->view('dashboard/dashboard');

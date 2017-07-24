@@ -2,6 +2,11 @@
 
 class User extends Controller {
     /*No error handeling for user mobile confirmation*/
+	public function defaultMethod(){
+        //No default method, get home view
+        header("Location: ".$GLOBALS['webhost']['base_url']."/home");
+        exit;
+    }
     public function login(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $mobileIsConfirmed = true;
@@ -177,6 +182,9 @@ class User extends Controller {
         }
     }
     public function confirm(){
+        if($this->userIsLoggedIn()){
+            header("Location: ".$GLOBALS['webhost']['base_url']."/home"); exit;
+        }
         $data = ['mobile' => "<br>"];
         if(isset($_SESSION['unconfirmed_user_mobile']))
             $data = ['mobile' => $_SESSION['unconfirmed_user_mobile']];
@@ -203,7 +211,7 @@ class User extends Controller {
                     $goto = $GLOBALS['webhost']['base_url']."/home";
                 }
 
-            }else $this->errors[] = "!رقم التأكيد غير صحيح";
+            }else $this->errors[] = "رقم التأكيد غير صحيح!";
 
 		    header('Content-Type: application/json; charset=utf-8');
             if(empty($this->errors)){
@@ -215,20 +223,41 @@ class User extends Controller {
             }
         }
     }
-    function resend_code(){
+    public function resendCode(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $this->sendUserConfirmationCode();
+            $goto = "";
+            if($this->sendUserConfirmationCode() === true){
+                //good
+            }else{
+                $this->errors[] = "لم تنجح إعادة الإرسال!";
+            }
+
+		    header('Content-Type: application/json; charset=utf-8');
+            if(empty($this->errors)){
+                echo json_encode(['goto' => $goto]);
+                header("HTTP/1.1 200 OK");
+            }else{
+                echo json_encode(['errors' => $this->errors]);
+                header("HTTP/1.1 400 Bad Request");
+            }
         }
     }
     private function sendUserConfirmationCode(){
-        if($this->userIsLoggedIn()){
+        if($this->userIsTemp()){
             $userModel = $this->model('UserModel');
-            $code = $userModel->getUserConfirmationCode($_SESSION['user_identification']);
-            $mobile = $userModel->getUserMobile($_SESSION['user_identification']);
+            $code = $userModel->getUserConfirmationCode($_SESSION['unconfirmed_user_id']);
+            $mobile = $userModel->getUserMobile($_SESSION['unconfirmed_user_id']);
 
-            $SMSservice = $this->service('sms');
-            $SMSservice->sendConfirmationCode($mobile, $code);
+            if($userModel->errorsExist()){
+                return false;
+            }else{                
+                $SMSservice = $this->service('sms');
+                $SMSservice->sendConfirmationCode($mobile, $code);
+                return true;
+            }
+            return false;
         }
+        return false;
     }
     private function logoutUser(){
         //Unset and Destroy
@@ -237,6 +266,9 @@ class User extends Controller {
     }
     private function loginTempUser(){
 
+    }
+    private function userIsTemp(){
+        return true;
     }
     private function loginUser($userid, $name, $type){
         $_SESSION['user_identification'] = $userid;

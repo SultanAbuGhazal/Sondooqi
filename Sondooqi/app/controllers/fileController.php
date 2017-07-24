@@ -2,7 +2,7 @@
 
 class File extends Controller {
 	public function defaultMethod(){
-        //A request to www.bestfix.ae/file is not valid
+        //A request to www.sondooqi.com/file is not valid
         //Default method is not used, redirect to home page
         header("Location: ".$GLOBALS['webhost']['base_url']."/home");
     }

@@ -22,12 +22,15 @@
               <div class="form-group">
                 <input class="form-control form-control-lg" type="text" placeholder="إكتب الرموز هنا" id="code-textbx" name="confirm-code" maxlength="6" minlength="6" required>
               </div>
-              <div class="error-box text-center" style="color: red; margin-bottom: 15px;"></div>
+              <div class="errors-box text-center" style="color: red; margin-bottom: 15px;"></div>
+              <div class="success-msg text-center" style="color: green; display: none;">تم التأكيد! <br> سوف تتم إعادة التوجيه خلال ثواني..<br><br> </div>
               <button  onclick="confirm(); return false;" class="btn btn-success form-control form-control-lg confirm-btn">تأكيد رقم الجوال</button>
             </form>
 
             <br>
-            <a href="#" class="paragraph">لم أستلم رسالة نصية</a>
+            <div id="resend-btn-container">
+              <button onclick="resend();"><a class="paragraph">لم أستلم رسالة نصية</a></button>
+            </div>
             <br>
         </div>    
         <div class="container bottom-spacer"><!--SPACER--></div>

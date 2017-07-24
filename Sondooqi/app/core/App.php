@@ -63,7 +63,6 @@ class App{
 			break;
 			case 'user': return; break;
 		}
-		return ['cont' => $controller, 'meth' => $method];
 	}
 	private function userIsAdmin(){
         if(isset($_SESSION['login_type']))

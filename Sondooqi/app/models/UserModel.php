@@ -32,7 +32,7 @@ class UserModel extends Model{
         return false;
     }
     function userIsValid($email){
-        $stmt = $this->getConnection()->prepare('SELECT usrid, fullname FROM users WHERE usremail=:email');
+        $stmt = $this->getConnection()->prepare('SELECT usrid, fullname, usrmobile FROM users WHERE usremail=:email');
         $stmt->bindParam(':email', $email, PDO::PARAM_STR); 
 
         try{ $stmt->execute();
@@ -50,7 +50,8 @@ class UserModel extends Model{
         $result = $stmt->fetchObject();
         return [
             "id" => $result->usrid,
-            "name" => $result->fullname
+            "name" => $result->fullname,
+            "mobile" => $result->usrmobile
         ];
     }
     function loginIsNotAllowed($email){
@@ -67,7 +68,7 @@ class UserModel extends Model{
         }
         
         $row = $stmt->fetchObject();
-        return ($row->allow_login === "0") ? true : false;
+        return ($row->allow_login == "0") ? true : false;
     }
     function mobileIsNotConfirmed($email){
         $stmt = $this->getConnection()->prepare('SELECT mobile_confirmed FROM users AS U
@@ -83,7 +84,7 @@ class UserModel extends Model{
         }
         
         $row = $stmt->fetchObject();
-        return ($row->mobile_confirmed === "0") ? true : false;
+        return ($row->mobile_confirmed == "0") ? true : false;
     }
     function userIsAuthentic($userid, $email, $pass){
         $stmt = $this->getConnection()->prepare('SELECT usrid FROM users
@@ -124,11 +125,10 @@ class UserModel extends Model{
 
         return $stmt->fetchObject();
     }
-    function getUserConfirmationCode($id_or_email){
+    function getUserConfirmationCode($userid){
         $stmt = $this->getConnection()->prepare('SELECT confirmation_code FROM users
-        WHERE usrid=:usrid OR usremail=:email');
-        $stmt->bindParam(':usrid', $id_or_email, PDO::PARAM_STR); 
-        $stmt->bindParam(':email', $id_or_email, PDO::PARAM_STR); 
+        WHERE usrid=:usrid');
+        $stmt->bindParam(':usrid', $userid, PDO::PARAM_STR);
 
         try{ $stmt->execute();
         }catch(PDOException $Exp){
@@ -144,9 +144,28 @@ class UserModel extends Model{
 
         return $stmt->fetchObject()->confirmation_code;
     }
+    function getUserMobile($userid){
+        $stmt = $this->getConnection()->prepare('SELECT usrmobile FROM users
+        WHERE usrid=:usrid');
+        $stmt->bindParam(':usrid', $userid, PDO::PARAM_STR);
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            $this->reportExpection($Exp);
+            return false;
+        }
+
+        if($stmt->rowCount() != 1){
+            $this->errors[] = "Found ".$stmt->rowCount()." entries, there must be exactly 1.";
+            return false;
+        }
+
+        return $stmt->fetchObject()->usrmobile;
+    }
     function createNewUser($address_id, $name, $pass, $email, $mobile){
         $stmt = $this->getConnection()->prepare('INSERT INTO users
-        VALUES (:userid, :address, :fullname, :pass, :email, :mobile, NOW(), :code, NOW(), 2, 1)');
+        VALUES (:userid, :address, :fullname, :pass, :email, :mobile, NOW(), :code, NOW(), 1, 1)');
         $stmt->bindParam(':userid', $id, PDO::PARAM_STR);
         $stmt->bindParam(':address', $address_id, PDO::PARAM_STR);
         $stmt->bindParam(':fullname', $name, PDO::PARAM_STR);
@@ -188,7 +207,7 @@ class UserModel extends Model{
             return false;
         }
 
-        return $stmt->fetchObject();
+        return true;
     }
     function deleteUserEntry($userid){
         $stmt = $this->getConnection()->prepare('DELETE FROM users WHERE usrid=:userid');

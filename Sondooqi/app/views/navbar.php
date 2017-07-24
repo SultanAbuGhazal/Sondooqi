@@ -108,7 +108,7 @@ function login(){
     .done(function(d){
 		$("form.user-login .errors-box").empty();
 		var response_json = d;
-		if(response_json['goto'] != "")
+		if(response_json['goto'] != "");
 			window.location = response_json['goto'];
     })
     .fail(function(d){
@@ -144,5 +144,15 @@ function login(){
 #login-btn:hover,
 #logout-btn:hover{
 	background-color: rgba(255, 255, 255, 0.9);
+}
+.login-modal-logo{
+    width: 40%;
+    margin: 15px 0 35px 0;
+}
+.login-form-group{
+    margin: 10px auto 0 auto;
+}
+.login-form-undertext{
+    margin: 15px 0 0 0;
 }
 </style>

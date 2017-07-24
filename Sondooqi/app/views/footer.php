@@ -11,7 +11,7 @@
                     <div class="col-md-4">
                         
                     </div>
-                    <div class="col-md-4 text-right heading7">
+                    <div class="col-md-4 text-left heading7">
                         Call Support (+970) 59 923-4567<br/>
                         <small>Email: support@sondooqi.com</small>
                     </div>

@@ -26,9 +26,9 @@
                         <p><small>2017 - All Rights Reserved for Sultan Abu Ghazal</small></p>
                     </div>
                     <div class="col-md-6 col-12 text-left">
-                        <a href="<?php echo $GLOBALS['webhost']['base_url']; ?>/home/about#contact" style="color: black">تواصل معنا</a>
+                        <a href="<?php echo $GLOBALS['webhost']['base_url']; ?>/home#contact-us" style="color: black">تواصل معنا</a>
                         /
-                        <a href="<?php echo $GLOBALS['webhost']['base_url']; ?>/home/about" style="color: black">كيف نعمل؟</a>
+                        <a href="<?php echo $GLOBALS['webhost']['base_url']; ?>/home#how-it-works" style="color: black">كيف نعمل؟</a>
                         /
                         <a href="<?php echo $GLOBALS['webhost']['base_url']; ?>/home" style="color: black">الرئيسية</a>
                     </div>

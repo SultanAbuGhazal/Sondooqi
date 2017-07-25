@@ -15,7 +15,8 @@
             <p class="paragraph"> لضمان وصول الطرود الخاصة بك إليك في أسرع وقت، يجب تأكيد رقم الجوال المزود من خلال رسالة نصية.</p>
             <p class="paragraph">سوف يتم إرسال رسالة نصية إلى الرقم التالي</p>
             <h3 class="number"><?php echo $data['mobile']; ?></h3>
-            <p><a href="#" class="paragraph">أريد تعديل رقم الجوال</a></p>
+            <!-- Modal trigger -->
+            <small><a href="#" class="paragraph" data-toggle="modal" data-target="#change-mobile-modal">أريد تعديل رقم الجوال</a></small>
             <p class="paragraph">فيها رقم مكون من ستة رموز، الرجاء كتابة هذا الرقم في المكان المخصص أدناه.</p><br>
             
             <form method="post" id="user-confirm">
@@ -34,6 +35,35 @@
             <br>
         </div>    
         <div class="container bottom-spacer"><!--SPACER--></div>
+        
+
+        <!-- Change Mobile Modal -->
+        <div class="modal fade" id="change-mobile-modal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title cairo-font">تعديل رقم الجوال</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form method="post" id="change-mobile-form">
+                  <div class="form-group">
+                    <label for="new-mobile"class="cairo-font">رقم الجوال الجديد</label>
+                    <input class="form-control" type="text" id="new-mobile" name="new-mobile" placeholder="إكتب الرقم الجديد هنا..">
+                  </div>
+                  <div class="success-change-msg text-center" style="color: green; display: none;">تم إرسال الرسالة النصية.</div>
+                  <div class="errors-box text-center" style="color: red"></div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cairo-font" data-dismiss="modal" style="margin-left: 10px;">إغلاق</button>
+                <button onclick="change();" type="button" class="btn btn-primary cairo-font">حفظ التعديل</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
 		<?php include $GLOBALS['webhost']['footer']; ?>
 		<?php include $GLOBALS['webhost']['scripts']; ?>

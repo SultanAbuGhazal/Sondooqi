@@ -161,17 +161,16 @@ class User extends Controller {
                     }
                     $userModel->deleteUserEntry($result['id']);
                 }
-            }    
-
-            /*Send confirmation SMS*/
-            $this->sendUserConfirmationCode();
+            }
 
             /*Go to confirmation page*/
 		    header('Content-Type: application/json; charset=utf-8');
             if(empty($this->errors)){
-                //$this->loginUser($result['id'], $result['name'], "User");
                 $_SESSION['unconfirmed_user_id'] = $result['id'];
                 $_SESSION['unconfirmed_user_name'] = $result['name'];
+                $_SESSION['unconfirmed_user_mobile'] = $result['mobile'];
+                /*Send confirmation SMS*/
+                $this->sendUserConfirmationCode();
 
                 echo json_encode(['goto' => $goto]);
                 header("HTTP/1.1 200 OK");
@@ -186,8 +185,11 @@ class User extends Controller {
             header("Location: ".$GLOBALS['webhost']['base_url']."/home"); exit;
         }
         $data = ['mobile' => "<br>"];
-        if(isset($_SESSION['unconfirmed_user_mobile']))
-            $data = ['mobile' => $_SESSION['unconfirmed_user_mobile']];
+        if(isset($_SESSION['unconfirmed_user_id'])){
+            $userModel = $this->model('UserModel');
+            $mobile = $userModel->getUserMobile($_SESSION['unconfirmed_user_id']);
+            $data = ['mobile' => $mobile];
+        }
 
         // require in the view
         $this->view('confirm/confirm', $data);
@@ -214,6 +216,28 @@ class User extends Controller {
             }else $this->errors[] = "رقم التأكيد غير صحيح!";
 
 		    header('Content-Type: application/json; charset=utf-8');
+            if(empty($this->errors)){
+                echo json_encode(['goto' => $goto]);
+                header("HTTP/1.1 200 OK");
+            }else{
+                echo json_encode(['errors' => $this->errors]);
+                header("HTTP/1.1 400 Bad Request");
+            }
+        }
+    }
+    public function changeMobile(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){    
+            $goto = "";
+            $userModel = $this->model('UserModel');
+            $userModel->changeUserMobile($_SESSION['unconfirmed_user_id'], $_POST['new-mobile']);
+
+            if($userModel->errorsExist()){
+                $this->errors[] = "لم ينجح تعديل رقم الجوال!";
+            }else{
+                $this->sendUserConfirmationCode();
+            }
+
+            header('Content-Type: application/json; charset=utf-8');
             if(empty($this->errors)){
                 echo json_encode(['goto' => $goto]);
                 header("HTTP/1.1 200 OK");

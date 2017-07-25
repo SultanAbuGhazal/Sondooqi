@@ -163,6 +163,21 @@ class UserModel extends Model{
 
         return $stmt->fetchObject()->usrmobile;
     }
+    function changeUserMobile($userid, $new_mobile){
+        $stmt = $this->getConnection()->prepare('UPDATE users SET usrmobile=:mobile
+        WHERE usrid=:usrid');
+        $stmt->bindParam(':mobile', $new_mobile, PDO::PARAM_STR);
+        $stmt->bindParam(':usrid', $userid, PDO::PARAM_STR);
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            $this->reportExpection($Exp);
+            return false;
+        }
+
+        return true;
+    }
     function createNewUser($address_id, $name, $pass, $email, $mobile){
         $stmt = $this->getConnection()->prepare('INSERT INTO users
         VALUES (:userid, :address, :fullname, :pass, :email, :mobile, NOW(), :code, NOW(), 1, 1)');
@@ -188,6 +203,7 @@ class UserModel extends Model{
         return [
             "id" => $id,
             "name" => $name,
+            "mobile" => $mobile,
             "code" => $confirmation_code
         ];
     }

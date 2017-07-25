@@ -29,3 +29,6 @@
         height: 100px;
     }
 }
+.cairo-font{
+     font-family: 'Cairo', sans-serif;
+}

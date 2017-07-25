@@ -30,32 +30,32 @@
             <h2 class="register-heading">إحصل على صندوقك الآن.. <strong style="font-size: 46px;">مجاناً</strong>!</h2>
             <form class="user-register" method="post">
               <div class="form-group">
-                <input class="form-control" type="email" placeholder="البريد الإلكتروني" id="register-email" name="user_email" value="example@email.com">
+                <input class="form-control" type="email" placeholder="البريد الإلكتروني" id="register-email" name="user_email" required>
               </div>
               <div class="form-group">
-                <input class="form-control" type="text" placeholder="رقم الجوال" id="register-mobile" name="user_mobile" value="0501234567">
+                <input class="form-control" type="text" placeholder="رقم الجوال" id="register-mobile" name="user_mobile" required>
               </div>
               <div class="form-group">
-                <input class="form-control" type="password" placeholder="كلمة السر" id="register-password" name="user_pass" value="1234">
+                <input class="form-control" type="password" placeholder="كلمة السر" id="register-password" name="user_pass" required>
               </div>
               <hr style="width: 80%; border: 1px solid orange;">
               <div class="form-group">
-                <input class="form-control" type="text" placeholder="الإسم الكامل" id="register-name" name="user_name" value="سلطان مبين جودت أبوغزال">
+                <input class="form-control" type="text" placeholder="الإسم الكامل" id="register-name" name="user_name" required>
               </div>
               <div class="form-group row">
                 <div class="col-lg-6">
-                  <input class="form-control" type="text" placeholder="المحافظة" id="register-city" name="user_city" value="نابلس">
+                  <input class="form-control" type="text" placeholder="المحافظة" id="register-city" name="user_city" required>
                 </div>
                 <div class="col-lg-6">
-                  <input class="form-control" type="text" placeholder="العنوان" id="register-address" name="user_address" value="سبسطية">
+                  <input class="form-control" type="text" placeholder="العنوان" id="register-address" name="user_address" required>
                 </div>
               </div>
               <div class="form-group">
-                <input class="form-control" type="text" placeholder="بالقرب من؟" id="register-nearby" name="user_nearby" value="قرب البلدية">
+                <input class="form-control" type="text" placeholder="بالقرب من؟" id="register-nearby" name="user_nearby" required>
               </div>
               <div class="form-check text-left" dir="ltr">
                 <label class="form-check-label" style="color: white">
-                  <input class="form-check-input" type="checkbox" value="">
+                  <input class="form-check-input" type="checkbox" required>
                      أنا أوافق على <a href="">الشروط والاحكام</a>
                 </label>
               </div>
@@ -74,13 +74,17 @@
   <div class="container" id="how-it-works">
     <div class="container" style="height: 40px;"><!--SPACER--></div>
     <hr style="width: 100%; border: 1px solid orange;">
-    <h1 class="heading-1 text-center">كيف نعمل؟</h1><br><br>
+    <h1 class="heading-2 text-center">كيف نعمل؟</h1><br><br>
     <div class="row">
-      <div class="col-md-6"></div>
-      <div class="col-md-6"></div>
-    </div>
-    <div class="text-center">
-      <img style="width: 70%" src="<?php echo $GLOBALS['webhost']['base_url']; ?>/app/assets/images/cycle-small.png" alt="how-it-works-figure">      
+      <div class="col-md-8 text-center">
+        <img style="width: 70%" src="<?php echo $GLOBALS['webhost']['base_url']; ?>/app/assets/images/cycle-small.png" alt="how-it-works-figure">      
+      </div>
+      <div class="col-md-4 how-it-works-container">
+        <h2 class="heading-1">مابعرف شو..</h2>
+        <p class="paragraph">
+          تعتمد أسعار الشحن لدينا على وزن الطرود. تكلفة أول 1/2 كيلو جرام هي 70 شيقل جديد بحيث يضاف 30 شيقل جديد لكل 1/2 كيلو جرام إضافي.
+        </p>
+      </div>
     </div>
   </div>
 
@@ -104,9 +108,15 @@
     <div class="container" style="height: 40px;"><!--SPACER--></div>
     <hr style="width: 100%; border: 1px solid orange;">
     <h1 class="heading-1 text-center">للتواصل والإستفسار</h1><br>
-    <div class="container" style="height: 800px;"><!--SPACER--></div>
-  </div>
+    <div class="text-center"><br>
+      <img src="<?php echo $GLOBALS['webhost']['base_url']; ?>/app/assets/images/whatsapp-logo.png" style="max-height: 100px;" alt="whatsapp-logo">    
+    </div>
+    <div class="text-center">
+      <span class="heading-2" dir="ltr" style="color: black; font-size: 48px;">+971 50 123-1234</span>
+    </div>
+  </div>    
 
+  <div class="container" style="height: 100px;"><!--SPACER--></div>
   <?php include $GLOBALS['webhost']['footer']; ?>
 
   <?php include $GLOBALS['webhost']['scripts']; ?>

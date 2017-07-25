@@ -39,3 +39,22 @@ function resend(){
         buttonContainer.append("<span style='color: red'>أعد تحميل الصفحة</span>");        
     });
 };
+
+function change(){
+    var formSelector = "form#change-mobile-form";
+    $.post(webhost+"/user/changeMobile", $(formSelector).serialize())
+    .done(function(d){
+		$(formSelector+" .errors-box").empty();
+        var response_json = d;
+        $("div.success-change-msg").css('display', 'block');
+        window.location.reload();        
+    })
+    .fail(function(d){
+		$(formSelector+" .errors-box").empty();
+		var response_json = JSON.parse(d.responseText);
+        $.each(response_json['errors'], function(i, v){
+			if(i) $(formSelector+" .errors-box").append("<br/>");
+            $(formSelector+" .errors-box").append(v);
+		});    
+    });
+};

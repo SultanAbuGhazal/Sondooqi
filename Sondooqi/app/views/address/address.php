@@ -47,8 +47,10 @@
   <div class="container card-padding">
     <h1 class="notice-title text-center">ملاحظات هامة</h1><br>
     <ul class="custom-list">
-      <li>يمكن إستخدام هذا العنوان عند الشراء من أي موقع من مواقع التسوق الإلكتروني الموجودة في دولة الإمارات العربية المتحدة.</li><br>
+      <li>يمكنك إستخدام هذا العنوان عند الشراء من أي موقع من مواقع التسوق الإلكتروني الموجودة في دولة الإمارات العربية المتحدة فقط.</li><br>
       <li>بما أن هذه المواقع تعمل -في الغالب- خارج نطاق الدولة التي تقطن أنت فيها، يجب الدفع عن طريق بطاقة إئتمانية وعدم إستخدام طريقة الدفع عند الإستلام.</li><br>
+      <li>في بعض الحلات النادرة، قد يكون هناك تكاليف جمركية سيتم إضافتها إلى تكاليف الشحن.</li><br>
+      <li>تدفع تكاليف الشحن كاملة نقداً عند الإستلام.</li><br>
       <li><strong>هام جداً:</strong> رقم صندوقي هو رقم مكون من ثمانية رموز يبدأ بحرفي "BX" وهو رقم مهم جدا. إنه الطريقة الوحيدة التي تمكننا من معرفة محتويات صندوقك، لذلك يجب التأكد من ذكر هذا الرقم في العنوان عند موقع التسوق لضمان عدم ضياع محتويات صندوقك وضمان وصولها إليك.</li>
       <div class="row">
         <img style="height: 100%; width: 60%; margin: 15px auto 15px auto;" src="..\app\assets\images\note-one.png" alt="note-one">
@@ -57,7 +59,6 @@
       <div class="row">
         <img style="height: 100%; width: 100%; margin: 0px auto 15px auto;" src="..\app\assets\images\note-two.png" alt="note-one">
       </div>
-      <li>الجمارك.</li><br>
       <li>بعض مواقع التسوق قد تطلب تأكيداً إجبارياً لرقم الجوال عبر رسالة نصية قصيرة، في هذه الحالة إستخدم رقمك الخاص للتأكيد وضع الرقم المصاحب لعنوان صندوقك فى خانة الملاحظات أو أي خانة أخرى.</li>
     </ul>
   </div>
@@ -67,7 +68,7 @@
 
   <div class="container card-padding">
     <h1 class="notice-title text-center">تعليمات الإستخدام</h1><br>
-    <p class="text-center paragraph">إستخدم هذا العنوان عند التسوق من مواقع التسوق الإلكتروني التي لا توفر خدمة التوصيل إلى داخل الأراضي الفلسطينية.</p><br>
+    <p class="text-center paragraph">إستخدم عنوان صندوقي الخاص بك <a href="<?php echo $GLOBALS['webhost']['base_url'].'/profile/address'; ?>">هذا</a> عند التسوق من مواقع التسوق الإلكتروني التي لا توفر خدمة التوصيل إلى داخل الأراضي الفلسطينية.</p><br>
     <ul class="custom-list">
       <li><strong>المثال الأول:</strong> في حالة وجود "Address line 1" و "Address line 2"</li><br>
       <div class="row" dir="ltr">
@@ -175,7 +176,7 @@
   <hr style="width: 40%; border: 1px solid orange;">
 
   <div class="container card-padding">
-    <h1 class="notice-title text-center">مواقعنا المفضلة</h1>
+    <h1 class="notice-title text-center">أكثر المواقع شعبية</h1>
     <?php 
       $this->getSnippet("favWebsites"); 
     ?>

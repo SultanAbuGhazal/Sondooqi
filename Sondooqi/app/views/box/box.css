@@ -6,6 +6,10 @@
     font-weight: 500;
     font-family: 'Cairo', sans-serif;
 }
+.heading-1{
+    font-family: 'Cairo', sans-serif;
+    font-size: 28px;
+}
 .item{
     background-color: rgb(250, 250, 250);
 }
@@ -14,4 +18,16 @@
 }
 .total-cost{
     font-family: 'Changa', sans-serif;
+}
+.cairo-font{
+    font-family: 'Cairo', sans-serif;
+}
+.nothing-btn{
+    background-color: orange;
+    font-weight: 600;
+    border: none;
+    font-family: 'Cairo', sans-serif;
+}
+.nothing-btn:hover{
+    background-color: orangered;
 }

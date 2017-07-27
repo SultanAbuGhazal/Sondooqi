@@ -176,6 +176,35 @@ class UserModel extends Model{
             return false;
         }
 
+        if($stmt->rowCount() != 1){
+            $this->errors[] = "Found ".$stmt->rowCount()." entries, there must be exactly 1.";
+            return false;
+        }
+
+        return true;
+    }
+    function changeUserPassword($userid, $oldPass, $newPass){
+        $stmt = $this->getConnection()->prepare('UPDATE users SET usrpass=:newpass
+        WHERE usrpass=:oldpass AND usrid=:userid ');
+        $stmt->bindParam(':newpass', $newHash, PDO::PARAM_STR);
+        $stmt->bindParam(':oldpass', $oldHash, PDO::PARAM_STR);
+        $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
+        
+        $oldHash = $this->generateHash($oldPass, $userid);  
+        $newHash = $this->generateHash($newPass, $userid);  
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            $this->reportExpection($Exp);
+            return false;
+        }
+
+        if($stmt->rowCount() != 1){
+            $this->errors[] = "Found ".$stmt->rowCount()." entries, there must be exactly 1.";
+            return false;
+        }
+
         return true;
     }
     function createNewUser($address_id, $name, $pass, $email, $mobile){

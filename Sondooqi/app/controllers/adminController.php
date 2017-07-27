@@ -8,7 +8,17 @@ class Admin extends Controller {
     }
 	public function dashboard(){
         //Get the view
-        $this->view('dashboard/dashboard');
+        $batchModel = $this->model('BatchModel');
+        $list_1 = $batchModel->getBatchesList();
+
+        $itemModel = $this->model('ItemModel');
+        $list_2 = $itemModel->getItemStatusesList();
+
+        
+
+        $data = ['batches_list' => $list_1, 'status_list' => $list_2];
+
+        $this->view('dashboard/dashboard', $data);
     }
 	public function insertItem(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){

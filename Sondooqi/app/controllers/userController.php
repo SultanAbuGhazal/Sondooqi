@@ -9,6 +9,7 @@ class User extends Controller {
     }
     public function login(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $this->validateLoginForm($_POST);
             $mobileIsConfirmed = true;
             $goto = $GLOBALS['webhost']['base_url']."/home";
             $userModel = $this->model('UserModel');
@@ -96,15 +97,18 @@ class User extends Controller {
     }
 	public function register(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $this->validateRegisterForm($_POST);
             $userModel = $this->model('UserModel');
             $goto = $GLOBALS['webhost']['base_url']."/user/confirm";
 
             /*Check email and phone number uniqueness*/
-            if($userModel->emailIsUsed($_POST['user_email'])){
-                $this->errors[] = "!هذا البريد الإكتروني مستخدم";
-            }
-            if($userModel->mobileIsUsed($_POST['user_mobile'])){
-                $this->errors[] = "!رقم الجوال هذا مستخدم";
+            if(empty($this->errors)){
+                if($userModel->emailIsUsed($_POST['user_email'])){
+                    $this->errors[] = "!هذا البريد الإكتروني مستخدم";
+                }
+                if($userModel->mobileIsUsed($_POST['user_mobile'])){
+                    $this->errors[] = "!رقم الجوال هذا مستخدم";
+                }
             }
             
             /*Insert Address*/
@@ -225,6 +229,10 @@ class User extends Controller {
             }
         }
     }
+    public function password($args){
+        //Get the view
+        $this->view('password/password');
+    }
     public function changeMobile(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){    
             $goto = "";
@@ -299,5 +307,33 @@ class User extends Controller {
         $_SESSION['user_name'] = $name;
         $_SESSION['login_time'] = time();
         $_SESSION['login_type'] = $type;        
+    }
+    private function validateRegisterForm(&$post){
+        foreach($post as $i){
+            if($i == ""){
+                $this->errors[] = "!الرجاء ملء جميع الخانات";
+                return;
+            }
+        }
+
+        if(!isset($post['user_accept'])){
+            $this->errors[] = "!حتى تتمكن من التسجيل، يجب أن توافق على الشروط والأحكام";
+            return;
+        }
+
+        if(!filter_var($post['user_email'], FILTER_VALIDATE_EMAIL))
+            $this->errors[] = "!البريد الإلكتروني غير صحيح";
+
+        if(strlen($post['user_pass']) < 8)
+            $this->errors[] = "!يجب أن تكون كلمة السر ثمانية أحرف أو أكثر";
+
+    }
+    private function validateLoginForm(&$post){
+        foreach($_POST as $i){
+            if($i == ""){
+                $this->errors[] = "!الرجاء كتابة البريد الإلكتروني وكلمة السر";
+                return;
+            }
+        }
     }
 }

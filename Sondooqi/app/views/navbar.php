@@ -74,7 +74,7 @@
 				</form>
 				<div class="login-form-undertext">
 					<small><a href="#">نسيت كلمة السر الخاصة بك؟</a></small><br>
-					<small>ليس لديك حساب؟<a href="#">  سجل هنا </a></small>
+					<small>ليس لديك حساب؟<a href="<?php echo $GLOBALS['webhost']['base_url']; ?>/home">  سجل هنا </a></small>
 				</div>
 			</div>
 		</div>
@@ -124,7 +124,8 @@ function login(){
 <?php endif; ?>
 <style type="text/css">
 .nav-item{
-  margin-left: 15px;
+  	margin-left: 15px;
+	font-family: 'Cairo', sans-serif;
 }
 #login-btn,
 #logout-btn{

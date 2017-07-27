@@ -67,17 +67,28 @@
                         <div class="container">
                             <div class="row" style="height: 50px;"><!--SPACER--></div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="dash-card">
                                     <form method="post" id="update-batch-form" enctype="multipart/form-data">
                                         <h2>Update Batch Status</h2> <br>
                                         <div class="form-group">
                                             <label for="update-batch-id">Batch ID number</label>
-                                            <input type="number" class="form-control" id="update-batch-id" name="batchid" value="BX" max="99999999" min="0" required>
+                                            <select class="form-control" id="update-batch-id" name="batchid" required>
+                                                <option selected disabled hidden>Select a batch..</option>
+                                                <?php foreach($data['batches_list'] as &$item) : ?> 
+                                                <?php $item['creation_time'] = date('l jS \of F Y', strtotime($item['creation_time'])); ?>
+                                                <option value="<?php echo $item['batchid']; ?>"><?php echo "Batch#".$item['batchid']." | ".$item['creation_time']; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="update-batch-status">New Status</label>
-                                            <input type="text" class="form-control" id="update-batch-status" name="newstatus" required>
+                                            <select class="form-control" id="update-batch-status" name="newstatus" required>
+                                                <option selected disabled hidden>Select a status..</option>                                                
+                                                <?php foreach($data['status_list'] as &$item) : ?> 
+                                                <option value="<?php echo $item['status_text']; ?>"><?php echo $item['itemstatusid']." | ".$item['status_text']; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
                                         </div><br>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary">Update</button>

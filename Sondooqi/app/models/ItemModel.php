@@ -20,12 +20,12 @@ class ItemModel extends Model{
         
         return $id;
     }
-    function updateBatchStatus($batchid, $newStatus){
+    function updateItemStatus($itemid, $newStatus){
         $stmt = $this->getConnection()->prepare('UPDATE items 
         SET status=(SELECT itemstatusid FROM itemstatus WHERE status_text=:newStatus)
-        WHERE batch=:batchid');
+        WHERE itemid=:itemid');
         $stmt->bindParam(':newStatus', $newStatus, PDO::PARAM_STR);
-        $stmt->bindParam(':batchid', $batchid, PDO::PARAM_INT);
+        $stmt->bindParam(':itemid', $itemid, PDO::PARAM_STR);
 
         try{ $stmt->execute();
         }catch(PDOException $Exp){
@@ -36,12 +36,24 @@ class ItemModel extends Model{
         
         return true;
     }
-    function updateItemStatus($itemid, $newStatus){
+    function getItemStatusesList(){
+        $stmt = $this->getConnection()->prepare('SELECT itemstatusid, status_text FROM itemstatus');
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            $this->reportExpection($Exp);
+            return false;
+        }
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function updateBatchStatus($batchid, $newStatus){
         $stmt = $this->getConnection()->prepare('UPDATE items 
         SET status=(SELECT itemstatusid FROM itemstatus WHERE status_text=:newStatus)
-        WHERE itemid=:itemid');
+        WHERE batch=:batchid');
         $stmt->bindParam(':newStatus', $newStatus, PDO::PARAM_STR);
-        $stmt->bindParam(':itemid', $itemid, PDO::PARAM_STR);
+        $stmt->bindParam(':batchid', $batchid, PDO::PARAM_INT);
 
         try{ $stmt->execute();
         }catch(PDOException $Exp){

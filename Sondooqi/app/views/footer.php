@@ -1,5 +1,5 @@
 
-<footer>
+<footer dir="rtl">
     <div class="container-fluid">
         <div class="row top-part">
             <div class="container">
@@ -8,10 +8,7 @@
                     <div class="col-md-4">
                         <img src="<?php echo $GLOBALS['webhost']['base_url']; ?>/app/assets/images/logo-ar.png" height="60" alt="">
                     </div>
-                    <div class="col-md-4">
-                        
-                    </div>
-                    <div class="col-md-4 text-left heading7">
+                    <div class="col-md-8 text-left heading7">
                         Call Support (+970) 59 923-4567<br/>
                         <small>Email: support@sondooqi.com</small>
                     </div>

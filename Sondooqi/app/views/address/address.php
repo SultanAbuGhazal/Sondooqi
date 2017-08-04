@@ -25,6 +25,8 @@
               <td><?php echo $data['addresses'][0]['fullname']; ?></td> </tr>
             <tr> <th scope="row"></th> <td>المنطقة</td>
               <td><?php echo $data['addresses'][0]['province']; ?></td> </tr>
+            <tr> <th scope="row"></th> <td>الشارع</td>
+              <td><?php echo $data['addresses'][0]['street']; ?></td> </tr>
             <tr> <th scope="row"></th> <td>العنوان</td>
               <td><?php echo $data['addresses'][0]['line_one'].", ".$data['addresses'][0]['line_two']; ?></td> </tr>
             <tr> <th scope="row"></th> <td>المدينة</td>
@@ -111,6 +113,12 @@
               </div>
             </div>
             <div class="form-group row">
+              <label class="col-sm-3 col-form-label text-right">Street</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['street']; ?>">
+              </div>
+            </div>
+            <div class="form-group row">
               <label class="col-sm-3 col-form-label text-right">Phone number</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['mobile']; ?>">
@@ -119,56 +127,64 @@
           </fieldset>
         </form>
       </div><br>
-      <li><strong>المثال الثاني:</strong> في حالة وجود "Address line 1" و "Address line 2"</li><br>
+      <li><strong>المثال الثاني:</strong> في حالة وجود خانة "الملاحظات"</li><br>
       <div class="row" dir="ltr">
         <form class="col-md-6 offset-md-3" id="example-form-one">
           <fieldset disabled>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label text-right">Full Name</label>
+            <div class="form-group row" dir="rtl">
+              <label class="col-sm-3 col-form-label text-right">الإسم</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['fullname']; ?>">
               </div>
             </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label text-right">Address Line 1</label>
+            <div class="form-group row" dir="rtl">
+              <label class="col-sm-3 col-form-label text-right" style="font-size: 14px;">إسم/رقم العمارة</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['line_one']; ?>">
               </div>
             </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label text-right">Address Line 2</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['line_two']; ?>">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label text-right">Country</label>
+            <div class="form-group row" dir="rtl">
+              <label class="col-sm-3 col-form-label text-right">بلد الإقامة</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['country']; ?>">
               </div>
             </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label text-right">City</label>
+            <div class="form-group row" dir="rtl">
+              <label class="col-sm-3 col-form-label text-right">المدينة</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['city']; ?>">
               </div>
             </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label text-right">State/Area</label>
+            <div class="form-group row" dir="rtl">
+              <label class="col-sm-3 col-form-label text-right">المنطقة</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['province']; ?>">
               </div>
             </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label text-right">Phone number</label>
+            <div class="form-group row" dir="rtl">
+              <label class="col-sm-3 col-form-label text-right">الشارع</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['street']; ?>">
+              </div>
+            </div>
+            <div class="form-group row" dir="rtl">
+              <label class="col-sm-3 col-form-label text-right">رقم الموبايل</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['mobile']; ?>">
+              </div>
+            </div>
+            <div class="form-group row" dir="rtl">
+              <label class="col-sm-3 col-form-label text-right">الملاحظات</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="<?php echo $data['addresses'][0]['line_two']; ?>">
               </div>
             </div>
           </fieldset>
         </form>
       </div>
       </li>
+      <br><br>
+      <div class="text-center paragraph">للإستفسارات والمزيد من المعلومات يرجى <a href="<?php echo $GLOBALS['webhost']['base_url'].'/home#contact-us'; ?>">التواصل معنا</a></div>
     </ul>
   </div>
 

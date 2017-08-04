@@ -1,0 +1,3 @@
+To admin@sondooqi.com: 
+ You have requested a password change! 
+ click here http://localhost/Sondooqi/Sondooqi/user/resetPassword/j9fcC9DHcTHUKJVWvugnbvdk0EInGgeC to change your password.

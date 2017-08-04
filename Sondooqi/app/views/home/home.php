@@ -11,7 +11,7 @@
   <?php include $GLOBALS['webhost']['navbar']; ?>
   
 		<div class="backdrop">
-      <div class="container" style="height: 90px;"><!--SPACER--></div>
+      <div class="container" style="height: 80px;"><!--SPACER--></div>
       <div class="container">
         <div class="row">
           <?php if($this->userIsLoggedIn()) : ?>
@@ -32,7 +32,7 @@
                 <input class="form-control" type="email" placeholder="البريد الإلكتروني" id="register-email" name="user_email" maxlength="128" required>
               </div>
               <div class="form-group">
-                <input class="form-control" type="text" placeholder="رقم الجوال" id="register-mobile" name="user_mobile" maxlength="16" required>
+                <input class="form-control" type="text" placeholder="رقم الجوال مع المفتاح، مثال: 00970590000000" id="register-mobile" name="user_mobile" maxlength="16" required>
               </div>
               <div class="form-group">
                 <input class="form-control" type="password" placeholder="كلمة السر" id="register-password" name="user_pass" minlength="8" maxlength="32" required>

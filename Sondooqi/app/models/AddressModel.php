@@ -1,14 +1,15 @@
 <?php
 
 class AddressModel extends Model{
-    function insertAddress($name, $mobile, $line1, $line2, $city, $province, $country){
+    function insertAddress($name, $mobile, $line1, $line2, $street="", $city, $province, $country){
         $stmt = $this->getConnection()->prepare('INSERT INTO addresses
-        VALUES(:addressid, :fullname, :mobile, :line_one, :line_two, :city, :province, :country, NOW())');
+        VALUES(:addressid, :fullname, :mobile, :line_one, :line_two, :street, :city, :province, :country, NOW())');
         $stmt->bindParam(':addressid', $id, PDO::PARAM_STR);
         $stmt->bindParam(':fullname', $name, PDO::PARAM_STR);
         $stmt->bindParam(':mobile', $mobile, PDO::PARAM_STR);
         $stmt->bindParam(':line_one', $line1, PDO::PARAM_STR);
         $stmt->bindParam(':line_two', $line2, PDO::PARAM_STR);
+        $stmt->bindParam(':street', $street, PDO::PARAM_STR);
         $stmt->bindParam(':city', $city, PDO::PARAM_STR);
         $stmt->bindParam(':province', $province, PDO::PARAM_STR);
         $stmt->bindParam(':country', $country, PDO::PARAM_STR);
@@ -24,7 +25,7 @@ class AddressModel extends Model{
         
         return $id;
     }
-    function editAddress($userid, $name, $mobile, $line1, $line2, $city, $province, $country){
+    function editAddress($userid, $name, $mobile, $line1, $line2, $street, $city, $province, $country){
         $stmt = $this->getConnection()->prepare('SELECT A.* FROM addresses AS A 
         JOIN users AS U ON U.address=A.addressid WHERE U.user=:userid');        
         $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
@@ -41,12 +42,13 @@ class AddressModel extends Model{
         $old_address = $stmt->fetchObject();
 
         $stmt = $this->getConnection()->prepare('UPDATE addresses
-        SET fullname=:name, mobile=:mobile, line_one=:line_1, line_two=:line_2, city=:city, province=:province, country=:country
+        SET fullname=:name, mobile=:mobile, line_one=:line_1, line_two=:line_2, street=:street, city=:city, province=:province, country=:country
         WHERE addressid=:addressid');        
         $stmt->bindParam(':name', $name, PDO::PARAM_STR);
         $stmt->bindParam(':mobile', $mobile, PDO::PARAM_STR);
         $stmt->bindParam(':line_1', $line1, PDO::PARAM_STR);
         $stmt->bindParam(':line_2', $line2, PDO::PARAM_STR);
+        $stmt->bindParam(':street', $street, PDO::PARAM_STR);
         $stmt->bindParam(':city', $city, PDO::PARAM_STR);
         $stmt->bindParam(':province', $province, PDO::PARAM_STR);
         $stmt->bindParam(':country', $country, PDO::PARAM_STR);

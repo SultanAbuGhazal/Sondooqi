@@ -119,6 +119,7 @@ class User extends Controller {
                     $_POST['user_mobile'], 
                     $_POST['user_address'], 
                     $_POST['user_nearby'], 
+                    "",
                     $_POST['user_city'], 
                     "الضفة الغربية",
                     "فلسطين"
@@ -229,9 +230,70 @@ class User extends Controller {
             }
         }
     }
-    public function password($args){
-        //Get the view
-        $this->view('password/password');
+    public function resetPassword($args){        
+        if($_SERVER["REQUEST_METHOD"] == "POST"){    
+            $goto = $GLOBALS['webhost']['base_url']."/home";
+            $this->validatePasswordResetForm($_POST);
+
+            if(empty($this->errors)){
+                $userModel = $this->model('UserModel');
+                $userModel->changeForgottenPassword($_POST['code'], $_POST['new_pass']);
+
+                if($userModel->errorsExist()){
+                    $this->errors[] = "!لم ينجح تغيير كلمة السر";
+                }
+            }
+
+            header('Content-Type: application/json; charset=utf-8');
+            if(empty($this->errors)){
+                echo json_encode(['goto' => $goto]);
+                header("HTTP/1.1 200 OK");
+            }else{
+                echo json_encode(['errors' => $this->errors]);
+                header("HTTP/1.1 400 Bad Request");
+            }
+        }else{
+            $userModel = $this->model('UserModel');
+            $userModel->validateForgotPasswordCode($args[0]);
+            if(!$userModel->errorsExist()){
+                $data = ['code' => $args[0]];
+                $this->view('password/password', $data);
+            }else header("Location: ".$GLOBALS['webhost']['base_url']."/home");
+        }
+    }
+    function forgotPassword(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $goto = $GLOBALS['webhost']['base_url']."/home";
+            if($_POST['user_email'] == ""){
+                $this->errors[] = "!يجب عليك أن تكتب بريدك الإلكتروني";
+            }
+
+            if(empty($this->errors)){
+                $userModel = $this->model('UserModel');
+                $code = $userModel->userForgotPassword($_POST['user_email']); 
+
+                if($userModel->errorsExist()){
+                    $this->errors[] = "!لم ينجح الطلب";
+                    if($GLOBALS['developerMode']){
+                        $this->errors = array_merge($this->errors, $userModel->getErrors());
+                    }
+                }
+            }
+            
+            if(empty($this->errors)){
+                $passwordChangeLink = $GLOBALS['webhost']['base_url']."/user/resetPassword/".$code;
+                $emailService = $this->service('email');
+                $emailService->sendPasswordChangeEmail($_POST['user_email'], $passwordChangeLink); 
+            }
+
+            if(empty($this->errors)){
+                echo json_encode(['goto' => $goto]);
+                header("HTTP/1.1 200 OK");
+            }else{
+                echo json_encode(['errors' => $this->errors]);
+                header("HTTP/1.1 400 Bad Request");
+            }
+        }        
     }
     public function changeMobile(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){    
@@ -334,6 +396,18 @@ class User extends Controller {
                 $this->errors[] = "!الرجاء كتابة البريد الإلكتروني وكلمة السر";
                 return;
             }
+        }
+    }
+    private function validatePasswordResetForm(&$post){
+        foreach($_POST as $i){
+            if($i == ""){
+                $this->errors[] = "!جميع الخانات مطلوبة";
+                return;
+            }
+        }
+
+        if($post['new_pass'] != $post['confirm_pass']){
+            $this->errors[] = "!هناك خطأ، كلمتي السر لا تتطابقان";
         }
     }
 }

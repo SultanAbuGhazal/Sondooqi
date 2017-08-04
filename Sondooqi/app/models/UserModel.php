@@ -207,6 +207,89 @@ class UserModel extends Model{
 
         return true;
     }
+    function changeForgottenPassword($code, $newPass){
+        $stmt = $this->getConnection()->prepare('SELECT usrid FROM users
+        WHERE password_change_code=:code');
+        $stmt->bindParam(':code', $code, PDO::PARAM_STR);
+        
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            $this->reportExpection($Exp);
+            return false;
+        }
+
+        $userid = $stmt->fetchObject()->usrid;
+
+        $stmt = $this->getConnection()->prepare('UPDATE users SET usrpass=:newpass
+        WHERE password_change_code=:code AND usrid=:userid');
+        $stmt->bindParam(':newpass', $newHash, PDO::PARAM_STR);
+        $stmt->bindParam(':code', $code, PDO::PARAM_STR);
+        $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
+        
+        $newHash = $this->generateHash($newPass, $userid);  
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            $this->reportExpection($Exp);
+            return false;
+        }
+
+        $stmt = $this->getConnection()->prepare('UPDATE users SET password_change_code=null
+        WHERE password_change_code=:code');
+        $stmt->bindParam(':code', $code, PDO::PARAM_STR);
+        
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            $this->reportExpection($Exp);
+            return false;
+        }
+
+        return true;
+    }
+    function userForgotPassword($email){
+        $stmt = $this->getConnection()->prepare('UPDATE users SET password_change_code=:code
+        WHERE usremail=:email');
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':code', $code, PDO::PARAM_STR);
+        
+        $code = $this->generateForgotPasswordCode();
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            $this->reportExpection($Exp);
+            return false;
+        }
+
+        if($stmt->rowCount() != 1){
+            $this->errors[] = "Found ".$stmt->rowCount()." entries, there must be exactly 1.";
+            return false;
+        }
+
+        return $code;
+    }
+    function validateForgotPasswordCode($code){
+        $stmt = $this->getConnection()->prepare('SELECT password_change_code FROM users
+        WHERE password_change_code=:code');
+        $stmt->bindParam(':code', $code, PDO::PARAM_STR);
+
+        try{ $stmt->execute();
+        }catch(PDOException $Exp){
+            $this->errors[] = "Unexpected error occured!";
+            $this->reportExpection($Exp);
+            return false;
+        }
+
+        if($stmt->rowCount() != 1){
+            $this->errors[] = "Found ".$stmt->rowCount()." entries, there must be exactly 1.";
+            return false;
+        }
+
+        return true;
+    }
     function createNewUser($address_id, $name, $pass, $email, $mobile){
         $stmt = $this->getConnection()->prepare('INSERT INTO users
         VALUES (:userid, :address, :fullname, :pass, :email, :mobile, NOW(), :code, NOW(), 1, 1)');
@@ -277,6 +360,16 @@ class UserModel extends Model{
             $res .= $charset[rand(0, $setlen - 1)];
         }
         return "UID".$res;
+    }
+    private function generateForgotPasswordCode() {
+        $len = 32;
+        $charset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $setlen = strlen($charset);
+        $res = '';
+        for ($i = 0; $i < $len; $i++) {
+            $res .= $charset[rand(0, $setlen - 1)];
+        }
+        return $res;
     }
     private function generateConfirmationCode() {
         $len = 6;

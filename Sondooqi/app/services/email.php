@@ -20,7 +20,10 @@ class Email extends Model{
         );
         */
     }
-    function sendPasswordChangeEmail(){
-        
+    function sendPasswordChangeEmail($email_address, $link){
+        $email = "To $email_address: \n You have requested a password change! \n click here $link to change your password.";
+        $myfile = fopen("emails.txt", "w") or die("Unable to open file!");
+        fwrite($myfile, $email);
+        fclose($myfile);
     }
 }

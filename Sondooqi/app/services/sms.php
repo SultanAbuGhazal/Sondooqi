@@ -2,7 +2,7 @@
 
 class Sms extends Model{
     function sendConfirmationCode($mobile, $code){
-        $message = "To $mobile: You Sondooqi confirmation code is $code. Thank you for using Sondooqi.";
+        $message = "To $mobile: Your Sondooqi confirmation code is $code. Thank you for using Sondooqi.";
         $myfile = fopen("sms-messages.txt", "w") or die("Unable to open file!");
         fwrite($myfile, $message);
         fwrite($myfile, "\n");

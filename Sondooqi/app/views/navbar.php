@@ -73,9 +73,34 @@
 					</div>
 				</form>
 				<div class="login-form-undertext">
-					<small><a href="#">نسيت كلمة السر الخاصة بك؟</a></small><br>
+					<small><a onclick="showPasswordResetModal(); return false;" href=" ">نسيت كلمة السر الخاصة بك؟</a></small><br>
 					<small>ليس لديك حساب؟<a href="<?php echo $GLOBALS['webhost']['base_url']; ?>/home">  سجل هنا </a></small>
 				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Forgot Password Modal -->
+<div class="modal fade" id="forgot-password-modal" tabindex="-1" role="dialog" aria-labelledby="forgot-password-modal" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">طلب تغير كلمة السر</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body text-center">
+				<form class="forgot-password-form" method="post">
+					<div class="form-group">
+						<input type="email" class="form-control form-control-lg" id="forgot-password-email" name="user_email" placeholder="بريدك الإكتروني" tabindex="1" autofocus required>
+					</div>
+					<div class="text-center errors-box" dir="ltr" style="color: red"></div>
+					<div class="text-center success-reset-msg" dir="ltr" style="color: green; display: none;">!تم إرسال رسالة إلى بريدك الإلكتروني<br>..ستتم إعادة التحويل خلال ثوان</div><br>
+					<div class="form-group">
+						<button onclick="resetPassword(); return false;" class="btn btn-danger form-control form-control-lg" style="font-family: 'Cairo', sans-serif; font-weight: 600; letter-spacing: 1px;">طلب التغيير</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -101,6 +126,31 @@ function logout(){
 function showLoginModal(){
 	$("#login-modal").on('shown.bs.modal', function(){
 		$("input#login-email").focus();
+	});
+};
+function showPasswordResetModal(){	
+	$("#login-modal").modal('hide');
+	$("#forgot-password-modal").modal('show');
+}
+function resetPassword(){
+	var formSelector = "form.forgot-password-form";
+    $.post(webhost+"/user/forgotPassword", $(formSelector).serialize())
+    .done(function(d){
+		$(formSelector+" .errors-box").empty();
+        $("div.success-reset-msg").css('display', 'block');
+        setTimeout(function(){ 
+			var response_json = d;
+			if(response_json['goto'] != "");
+				window.location = response_json['goto'];
+        }, 3000);
+    })
+    .fail(function(d){
+		$(formSelector+" .errors-box").empty();
+		var response_json = JSON.parse(d.responseText);
+        $.each(response_json['errors'], function(i, v){
+			if(i) $(formSelector+" .errors-box").append("<br/>");
+            $(formSelector+" .errors-box").append(v);
+		});   
 	});
 };
 function login(){

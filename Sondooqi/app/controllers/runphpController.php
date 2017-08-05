@@ -2,7 +2,9 @@
 
 class Runphp extends Controller {
 	public function defaultMethod(){
-        require_once "..app\assets\lib";
+        echo realpath("");
+        return;
+        require_once 'vendor\autoload.php';
         $credentials = new Nexmo\Client\Credentials\Basic('ffcac206', 'ea4de7f43bca523f');
         $client = new Nexmo\Client($credentials);
         print_r($client);

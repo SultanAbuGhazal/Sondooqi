@@ -1,6 +1,7 @@
 
 <nav class="navbar navbar-toggleable-md fixed-top navbar-light bg-faded"
-	style="background-color: rgba(255, 218, 151, 0.7); border-bottom: 2px solid black">
+	style="background-color: rgba(255, 218, 151, 0.7); border-bottom: 1px solid grey;
+    box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.7);">
 	<button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbar-toggle" aria-controls="navbar-toggle" aria-expanded="false" aria-label="Toggle navigation">
 	<span class="navbar-toggler-icon"></span>
 	</button>

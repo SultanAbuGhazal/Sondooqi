@@ -9,4 +9,8 @@ class Home extends Controller {
         //Get the view
         $this->view('about/about');
     }
+    public function terms(){
+        //Get the view
+        $this->view('T&C/T&C');
+    }
 }

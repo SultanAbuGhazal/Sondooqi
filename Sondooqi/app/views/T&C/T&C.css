@@ -1,0 +1,17 @@
+
+.card-padding{
+    padding: 25px 25px 15px 25px;
+}
+.terms-list{
+    font-family: 'Cairo', sans-serif;
+}
+.title{
+    color: orange;
+    font-size: 32px;
+    font-weight: 600;
+    font-family: 'changa', serif;
+}
+.section-title{
+    padding: 0 0 15px 0;
+    font-weight: 700;
+}

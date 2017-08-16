@@ -55,7 +55,7 @@
               <div class="form-check text-left" dir="ltr">
                 <label class="form-check-label" style="color: white">
                   <input class="form-check-input" type="checkbox" id="user_accept" name="user_accept" required>
-                     أنا أوافق على <a href="">الشروط والاحكام</a>
+                     أنا أوافق على <a href="<?php echo $GLOBALS['webhost']['base_url']."/home/terms"; ?>">الشروط والاحكام</a>
                 </label>
               </div>
               <div class="errors-box text-center" style="color: red" dir="ltr"></div>

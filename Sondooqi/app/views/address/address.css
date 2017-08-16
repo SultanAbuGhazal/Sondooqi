@@ -17,6 +17,10 @@
 .paragraph{
     font-family: 'Cairo', sans-serif;
 }
+.paragraph2{
+    font-size: 20px;
+    font-family: 'Cairo', sans-serif;
+}
 .notice-title{
     color: orange;
     font-size: 24px;

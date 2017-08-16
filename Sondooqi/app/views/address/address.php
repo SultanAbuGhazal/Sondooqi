@@ -16,7 +16,7 @@
     <div class="row">
       <div class="col-md-6">
         <h1 class="heading">استخدم</h1>
-        <p class="lead paragraph">هذا العنوان عند الشراء من مواقع التسوق الإلكتروني المفضلة لديك التي لا توفر خدمة التوصيل إلى داخل الأراضي الفلسطينية.</p>
+        <p class="lead paragraph">هذا العنوان عند الشراء من مواقع التسوق الإلكتروني المفضلة لديك اللتي لا توفر خدمة التوصيل إلى داخل الأراضي الفلسطينية.</p>
       </div>
       <div class="col-md-6">
         <table class="table table-sm">
@@ -70,7 +70,7 @@
 
   <div class="container card-padding">
     <h1 class="notice-title text-center">تعليمات الإستخدام</h1><br>
-    <p class="text-center paragraph">إستخدم عنوان صندوقي الخاص بك <a href="<?php echo $GLOBALS['webhost']['base_url'].'/profile/address'; ?>">هذا</a> عند التسوق من مواقع التسوق الإلكتروني التي لا توفر خدمة التوصيل إلى داخل الأراضي الفلسطينية.</p><br>
+    <p class="text-center paragraph2">إستخدم عنوان صندوقي الخاص بك <a href="<?php echo $GLOBALS['webhost']['base_url'].'/profile/address'; ?>">هذا</a> عند التسوق من مواقع التسوق الإلكتروني التي تعمل في دولة الإمارات واللتي لا توفر خدمة التوصيل إلى داخل الأراضي الفلسطينية.</p><br>
     <ul class="custom-list">
       <li><strong>المثال الأول:</strong> في حالة وجود "Address line 1" و "Address line 2"</li><br>
       <div class="row" dir="ltr">
